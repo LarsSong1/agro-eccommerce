@@ -14,7 +14,7 @@ export const signUp = async (data) => {
 
 export const updateProfile = async (data) => {
     try {
-        await supabase.from('profiles').upsert(data, { returning: 'minimal' })
+        await supabase.from('profiles').upsert(data);
     } catch (err) {
         console.error(err);
     }
@@ -24,7 +24,7 @@ export const updateProfile = async (data) => {
 // Funcion Ingresar credenciales si usaurio ya fue creado
 export const signIn = async (data) => {
     try {
-        let { data: {user}} = await supabase.auth.signInWithOtp(data)
+        let { data: {user}} = await supabase.auth.signInWithPassword(data)
     } catch (err) {
         console.error(err)
     }

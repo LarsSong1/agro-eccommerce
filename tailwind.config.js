@@ -20,6 +20,9 @@ export default {
         },
         customBrown: {
           DEFAULT: '#593300',
+        },
+        customOrange: {
+          DEFAULT: '#B80000',
         }
       },
       fontFamily: {

@@ -2,12 +2,12 @@
 
 import Home from './Pages/Home/Home'
 import NotFound from './Pages/Errors/notFound'
-
 import { Route, Outlet, BrowserRouter, createBrowserRouter, RouterProvider, createRoutesFromElements, ScrollRestoration } from 'react-router-dom'
 import { AuthProvider } from './context/AutContext'
 import Login from './Pages/Login/Login'
 import Register from './Pages/Register/Register'
-import Navbar from './components/Home/Navbar'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer/Footer'
 
 
 
@@ -15,10 +15,11 @@ const Layout = () => {
   return (
     <>
       <AuthProvider>
-        <section className='max-w-[1920px] mx-auto pl:0 pr:0 lg:pl-40 lg:pr-40'>
+        <section className='max-w-[1920px] mx-auto relative flex flex-col items-center '>
           <Navbar />
           <Outlet />
           <ScrollRestoration />
+          <Footer/>
 
         </section>
 
