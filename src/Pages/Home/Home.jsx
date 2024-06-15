@@ -3,8 +3,11 @@ import AuthContext from '../../context/AutContext'
 import { logout } from '../../services/supabase/Auth';
 import Grid from '../../components/Grid';
 import BtnBlack from '../../shared/btnBlack';
-import { quicelum, zanahoriaImage } from '../../assets/content';
+import { CleanFilterIcon, quicelum, zanahoriaImage } from '../../assets/content';
 import Flex from '../../components/Flex';
+import ProductCard from '../../shared/productCard';
+import NotFound from '../Errors/notFound';
+import Slider from '../../shared/slider';
 
 
 
@@ -51,31 +54,36 @@ function Home() {
                         </Flex>
                         <Flex className='flex flex-col justify-center col-span-10 bg-customGray rounded-xl h-[560px] lg:p-12 p-6'>
                             <h2 className='text-xl font-bold lg:text-4xl text-black mb-4'>Mejores Productos</h2>
-                            <Flex className='flex'>
-                                <div className="card w-[350px] h-[400px] bg-white shadow-2xl relative">
-                                    <Flex className='bg-black w-[120px] h-[50px] absolute top-[-10px] left-10 z-10 rounded-b-xl flex items-center justify-center'>
-                                        <h4 className='text-white text-center'>Oferta</h4>
-                                    </Flex>
-                                    <figure className='rounded-xl h-[280px] bg-customGray relative m-4 mb-0 overflow-hidden'>
-                                        <img className=' absolute w-52 h-72 top-10 right-2' src={quicelum} alt="Shoes" />
-                                    </figure>
-                                    <div className="flex justify-center flex-row card-body h-[75px] p-4">
-                                        <div className='basis-[50%] text-start'>
-                                            <h2 className="card-title text-2xl">Quicelum</h2>
-                                            <p>Categoria</p>
-                                        </div>
-                                        <div className='basis-[50%] text-end'>
-                                            <p className='opacity-60'>$24.50</p>
-                                            <p className='font-bold'>$12.50</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            <Flex className='flex gap-4'>
+                                <Slider />
 
                             </Flex>
                         </Flex>
+                        <div className='col-span-10 mx-auto mt-14'>
+                            <h1 className='mx-auto text-2xl lg:text-6xl text-black font-bold text-center'>Insumos Agricolas</h1>
+                            <p className='text-center text-xl mt-2 mb-10'>A tu disposición</p>
+                            <Flex className='flex rounded-2xl w-[360px] items-center border-t-0 border-2 h-[50px]  border-customGray mx-auto'>
+                                <select className=" lg:w-[250px] ps-4 focus:rounded-l-2xl">
+                                    <option selected>best headless CMS</option>
+                                    <option>Strapi</option>
+                                    <option>Ghost</option>
+                                    <option>Netlify CMS</option>
+                                    <option>Sanity</option>
+                                </select>
+                                <div className='w-[120px] me-1 justify-center flex items-center bg-customGray h-[40px]  rounded-r-2xl '>
+                                    <p className='inline-flex text-xs font-bold'>
+                                        Limpiar Filtro 
+                                        <CleanFilterIcon  className='ms-2 mt-[0.5px]'/>
+                                    </p>
+                                </div>
+
+                            </Flex>
+                        </div>
+
+
                     </Grid>
 
-                    <button className='btn mt-20' onClick={logoutApp}>logout</button>
+
 
 
 
@@ -83,7 +91,7 @@ function Home() {
 
                 </>
             ) : (
-                <p>No hay usuario autenticado</p>
+                <NotFound />
             )}
 
 

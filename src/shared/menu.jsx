@@ -1,23 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import BtnShop from './btnShop'
-import { ProfileIcon } from '../assets/content'
+import { CartIcon, ExitIcon, ProfileIcon } from '../assets/content'
+import { logout } from '../services/supabase/Auth'
 
 function Menu({ text, url, span, className }) {
 
     return (
-        <ul id='menuProfile' className={`menu bg-base-300 rounded-box ${className}`}>
+        <ul id='menuProfile' className={`menu  rounded-box ${className}`}>
             <li>
-                <Link to={url}>
+                <Link to='/profile'>
                     <ProfileIcon />
-                    {text}
-                    <span className="badge badge-sm">{span}</span>
+                    Profile 
                 </Link>
-
             </li>
             <li>
-                <BtnShop/>
+                <Link to='/cart'>
+                    <CartIcon/>
+                    Carrito
+                </Link>
             </li>
+            <li>
+                <Link onClick={()=>logout()}>
+                    <ExitIcon/>
+                    Salir
+                </Link>
+            </li>
+            
         </ul>
     )
 }

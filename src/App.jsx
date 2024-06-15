@@ -18,7 +18,7 @@ const Layout = () => {
         <section className='max-w-[1920px] mx-auto relative flex flex-col items-center '>
           <Navbar />
           <Outlet />
-          <ScrollRestoration />
+          {/* <ScrollRestoration /> */}
           <Footer/>
 
         </section>
