@@ -19,7 +19,7 @@ function Drawer() {
             <Link to='/' className='font-bold text-lg'>Inicio</Link>
           </li>
           <li>
-            <Link to='/products' className='font-bold text-lg'>Productos</Link>
+            <Link to='/shop' className='font-bold text-lg'>Tienda</Link>
           </li>
           <li>
             <Link to='/contact' className='font-bold text-lg'>Contactanos</Link>

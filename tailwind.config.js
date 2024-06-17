@@ -23,6 +23,12 @@ export default {
         },
         customOrange: {
           DEFAULT: '#B80000',
+        },
+        customGreen: {
+          DEFAULT: '#95DE00'
+        }, 
+        customBlue: {
+          DEFAULT: '#084C6F'
         }
       },
       fontFamily: {
