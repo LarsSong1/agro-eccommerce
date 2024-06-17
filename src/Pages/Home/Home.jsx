@@ -8,6 +8,7 @@ import Flex from '../../components/Flex';
 import ProductCard from '../../shared/productCard';
 import NotFound from '../Errors/notFound';
 import Slider from '../../shared/slider';
+import BestProducts from '../../shared/BestProducts';
 
 
 
@@ -53,13 +54,7 @@ function Home() {
 
 
                         </Flex>
-                        <Flex className='flex flex-col justify-center col-span-10 bg-customGray rounded-xl h-[560px] lg:p-12 p-6'>
-                            <h2 className='text-xl font-bold lg:text-4xl text-black mb-4'>Mejores Productos</h2>
-                            <Flex className='flex'>
-                                <Slider />
-
-                            </Flex>
-                        </Flex>
+                        <BestProducts/>
                         <div className='col-span-10 mx-auto mt-14'>
                             <h1 className='mx-auto text-2xl lg:text-6xl text-black font-bold text-center'>Insumos Agricolas</h1>
                             <p className='text-center text-xl mt-2 mb-10'>A tu disposición</p>

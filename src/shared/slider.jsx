@@ -9,15 +9,18 @@ function Slider() {
   return (
     <Swiper
         slidesPerView={4}
-        className='mySwipper'
+        style={{
+            margin: 'auto'
+        }}
         modules={[Autoplay]}
         breakpoints={{
             140: {
                 slidesPerView: 1,
+                spaceBetween: 2
             
             },
             500: {
-                slidesPerView: 2,
+                slidesPerView: 1,
                 spaceBetween: 40,
 
             },

@@ -40,13 +40,13 @@ function Navbar() {
                     <a className="text-xl ">
                         <img className='w-16 h-16' src={agrozamLogo} alt="logo" />
                     </a>
-                    <div className=''>
+                    {/* <div className=''>
                         <label className=" relative h-[50px] flex justify-center items-center gap-2">
                             <input type="text" className="grow border-[1.2px] border-black border-opacity-25 rounded-md ps-2 h-[40px]" placeholder="Buscar Producto" />
                             <CiSearch className='absolute right-4' />
 
                         </label>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="navbar-center flex gap-2 grow lg:justify-center lg:w-[60%] ms-4">
                     <Link className='lg:block hidden' to='/'>Inicio</Link>

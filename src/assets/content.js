@@ -10,6 +10,9 @@ import { ImExit } from "react-icons/im";
 import { MdFilterAltOff } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
+import { CiSearch } from "react-icons/ci";
+import { CiFilter } from "react-icons/ci";
+import { IoFilter } from "react-icons/io5";
 
 // LOGOS
 export const googleLogo = glogo
@@ -25,6 +28,9 @@ export const CartIcon = IoCartOutline
 export const ExitIcon = ImExit
 export const CleanFilterIcon = MdFilterAltOff
 export const CloseIcon = IoMdClose
+export const SearchIcon = CiSearch
+export const FilterIcon = CiFilter
+export const FilterIcon2 = IoFilter
 
 // IMANGENES
 export const alternativePicture = agrouser
