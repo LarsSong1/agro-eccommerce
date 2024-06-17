@@ -9,6 +9,7 @@ import whatsapp from './logos/whatsapp.svg'
 import { ImExit } from "react-icons/im";
 import { MdFilterAltOff } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
 
 // LOGOS
 export const googleLogo = glogo
@@ -23,6 +24,7 @@ export const ArrowUpRight = FiArrowUpRight
 export const CartIcon = IoCartOutline
 export const ExitIcon = ImExit
 export const CleanFilterIcon = MdFilterAltOff
+export const CloseIcon = IoMdClose
 
 // IMANGENES
 export const alternativePicture = agrouser

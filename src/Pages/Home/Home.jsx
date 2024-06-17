@@ -26,7 +26,8 @@ function Home() {
     return (
         <section className='w-full'>
             {user ? (
-                <>
+                <>  
+                    
                     <Grid className='mt-28 lg:w-[80%] grid mx-auto grid-cols-6 lg:grid-cols-10 gap:2 lg:gap-4'>
 
                         <Flex className='bg-customGray h-[350px] lg:h-[500px] flex col-span-6 rounded-xl m-4 mb-0 lg:m-0'>
@@ -54,7 +55,7 @@ function Home() {
                         </Flex>
                         <Flex className='flex flex-col justify-center col-span-10 bg-customGray rounded-xl h-[560px] lg:p-12 p-6'>
                             <h2 className='text-xl font-bold lg:text-4xl text-black mb-4'>Mejores Productos</h2>
-                            <Flex className='flex gap-4'>
+                            <Flex className='flex'>
                                 <Slider />
 
                             </Flex>
@@ -63,19 +64,31 @@ function Home() {
                             <h1 className='mx-auto text-2xl lg:text-6xl text-black font-bold text-center'>Insumos Agricolas</h1>
                             <p className='text-center text-xl mt-2 mb-10'>A tu disposición</p>
                             <Flex className='flex rounded-2xl w-[360px] items-center border-t-0 border-2 h-[50px]  border-customGray mx-auto'>
-                                <select className=" lg:w-[250px] ps-4 focus:rounded-l-2xl">
+                                <select className="w-[250px] ps-4 focus:rounded-l-2xl">
                                     <option selected>best headless CMS</option>
                                     <option>Strapi</option>
                                     <option>Ghost</option>
                                     <option>Netlify CMS</option>
                                     <option>Sanity</option>
                                 </select>
-                                <div className='w-[120px] me-1 justify-center flex items-center bg-customGray h-[40px]  rounded-r-2xl '>
+                                <div className='w-[120px] mx-auto me-1 justify-center flex items-center bg-customGray h-[40px]  rounded-r-2xl '>
                                     <p className='inline-flex text-xs font-bold'>
-                                        Limpiar Filtro 
-                                        <CleanFilterIcon  className='ms-2 mt-[0.5px]'/>
+                                        Limpiar Filtro
+                                        <CleanFilterIcon className='ms-2 mt-[0.5px]' />
                                     </p>
                                 </div>
+
+                            </Flex>
+                            <Flex className='mt-10 flex flex-wrap gap-4 justify-center'>
+                                <ProductCard className=''/>
+                                <ProductCard className=''/>
+                                <ProductCard className=''/>
+                                <ProductCard className=''/>
+                                <ProductCard className=''/>
+                                <ProductCard className=''/>
+                                <ProductCard className=''/>
+                                <ProductCard className=''/>
+                              
 
                             </Flex>
                         </div>

@@ -28,7 +28,7 @@ function Slider() {
             },
             1450: {
                 slidesPerView: 4,
-                spaceBetween: 200,
+                spaceBetween: 100,
             },
         }}
         loop={true}

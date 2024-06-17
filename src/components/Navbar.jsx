@@ -5,9 +5,13 @@ import Avatar from '../shared/avatar';
 import AuthContext from '../context/AutContext';
 import BtnShop from '../shared/btnShop';
 import { Link } from 'react-router-dom';
+import DrawerContext from '../context/DrawerContext';
 
 
 function Navbar() {
+
+    const { toggleDrawer } = useContext(DrawerContext);
+
     const { user } = useContext(AuthContext)
     console.log(user)
     let username = ''
@@ -24,8 +28,10 @@ function Navbar() {
 
     return (
         <>
-            <div className="navbar fixed lg:w-[80%] bg-white z-20">
-                <div className='lg:hidden navbar-start w-[20%] btn bg-white hover:bg-white border-none relative'>
+            <div className="navbar fixed lg:w-[80%] bg-white z-10 ">
+                <div
+                    onClick={toggleDrawer(true)}
+                    className='lg:hidden navbar-start w-[20%] btn bg-white hover:bg-white border-none relative' >
                     <MenuIcon className='relative' color='black' height={20} width={30} />
                 </div>
 
@@ -42,7 +48,7 @@ function Navbar() {
                         </label>
                     </div>
                 </div>
-                <div className="navbar-center flex gap-2 grow lg:justify-start lg:items-center w-[60%] lg:ms-4">
+                <div className="navbar-center flex gap-2 grow lg:justify-center lg:w-[60%] ms-4">
                     <Link className='lg:block hidden' to='/'>Inicio</Link>
                     <Link className='lg:block hidden' to='/products'>Productos</Link>
                     <img className='w-16 h-16 lg:hidden mx-auto block' src={agrozamLogo} alt="logo" />

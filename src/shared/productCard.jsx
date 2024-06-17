@@ -2,9 +2,9 @@ import React from 'react'
 import Flex from '../components/Flex'
 import { CartIcon, quicelum } from '../assets/content'
 
-function ProductCard() {
+function ProductCard({className}) {
     return (
-        <div className="card w-[350px] h-[400px] bg-white shadow-2xl relative">
+        <div className={`card w-[320px] h-[400px] bg-white shadow-2xl relative ${className}`}>
             <div className='absolute top-2 right-2 z-10 bg-white rounded-full p-2'>
                 <CartIcon className='w-6 h-6'/>
             </div>

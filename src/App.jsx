@@ -8,6 +8,8 @@ import Login from './Pages/Login/Login'
 import Register from './Pages/Register/Register'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer/Footer'
+import Drawer from './shared/drawer'
+import { DrawerProvider } from './context/DrawerContext'
 
 
 
@@ -15,13 +17,16 @@ const Layout = () => {
   return (
     <>
       <AuthProvider>
-        <section className='max-w-[1920px] mx-auto relative flex flex-col items-center '>
-          <Navbar />
-          <Outlet />
-          {/* <ScrollRestoration /> */}
-          <Footer/>
+        <DrawerProvider>
+          <section className='max-w-[1920px] mx-auto relative flex flex-col items-center'>
+            <Drawer />
+            <Navbar />
+            <Outlet />
+            {/* <ScrollRestoration /> */}
+            <Footer />
 
-        </section>
+          </section>
+        </DrawerProvider>
 
       </AuthProvider>
     </>
