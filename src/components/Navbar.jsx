@@ -28,7 +28,7 @@ function Navbar() {
 
     return (
         <>
-            <div className="navbar fixed lg:w-[80%] bg-white z-10 ">
+            <div className="navbar fixed lg:w-[80%] bg-white z-20 ">
                 <div
                     onClick={toggleDrawer(true)}
                     className='lg:hidden navbar-start w-[20%] btn bg-white hover:bg-white border-none relative' >
@@ -51,6 +51,7 @@ function Navbar() {
                 <div className="navbar-center flex gap-2 grow lg:justify-center lg:w-[60%] ms-4">
                     <Link className='lg:block hidden' to='/'>Inicio</Link>
                     <Link className='lg:block hidden' to='/shop'>Productos</Link>
+                    <Link className='lg:block hidden' to='/product_detail'>D Products</Link>
                     <img className='w-16 h-16 lg:hidden mx-auto block' src={agrozamLogo} alt="logo" />
                 </div>
                 <div className='navbar-end w-[20%]'>

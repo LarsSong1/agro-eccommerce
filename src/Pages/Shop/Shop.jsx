@@ -32,7 +32,7 @@ function Shop() {
   return (
     <section className='w-full mt-28 mx-auto'>
       <Grid className='grid col-span-10 grid-cols-10 lg:w-[80%] mx-auto '>
-        <Flex className='lg:col-span-2 col-span-10 lg:ps-0 lg:pe-0  pe-4 ps-4'>
+        <Flex className='lg:col-span-2 col-span-10 lg:ps-0 lg:pe-0  pe-8 ps-8'>
           <div className=''>
             <h2 className='text-2xl text-start'>Filtrar Productos</h2>
             <p className='text-md'>Categorias</p>
@@ -55,7 +55,7 @@ function Shop() {
 
           </div>
         </Flex>
-        <div className='lg:col-span-8 col-span-10 ps-4 pe-4 lg:pe-0 lg:ps-6'>
+        <div className='lg:col-span-8 col-span-10 ps-8 pe-8 lg:pe-0 lg:ps-9'>
           <Flex className='flex gap-2 flex-wrap'>
             <InputSearch className='grow mb-2' />
             <BtnIcon text='filtros' icon={<FilterIcon/>}/>

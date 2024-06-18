@@ -12,6 +12,7 @@ import Drawer from './shared/drawer'
 import { DrawerProvider } from './context/DrawerContext'
 import Contact from './Pages/Contact/Contact'
 import Shop from './Pages/Shop/Shop'
+import ProductDetail from './Pages/ProductDetail/ProductDetail'
 
 
 
@@ -40,9 +41,10 @@ const router = createBrowserRouter(
     <Route>
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />}></Route>
-        <Route  path='*' element={<NotFound />}></Route>
-        <Route path='/contact' element={<Contact/>}></Route>
-        <Route  path='/shop' element={<Shop/>}></Route>
+        <Route path='*' element={<NotFound />}></Route>
+        <Route path='/contact' element={<Contact />}></Route>
+        <Route path='/shop' element={<Shop />}></Route>
+        <Route path='/product_detail' element={<ProductDetail />}></Route>
       </Route>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/register' element={<Register />}></Route>

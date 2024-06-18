@@ -13,6 +13,10 @@ import { IoMdClose } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { CiFilter } from "react-icons/ci";
 import { IoFilter } from "react-icons/io5";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { CiHeart } from "react-icons/ci";
+import { IoMdAdd } from "react-icons/io";
+import { FaStar } from "react-icons/fa";
 
 // LOGOS
 export const googleLogo = glogo
@@ -31,6 +35,10 @@ export const CloseIcon = IoMdClose
 export const SearchIcon = CiSearch
 export const FilterIcon = CiFilter
 export const FilterIcon2 = IoFilter
+export const BackArrowIcon = IoIosArrowRoundBack
+export const HearthIcon = CiHeart
+export const AddIcon = IoMdAdd
+export const StarIcon = FaStar
 
 // IMANGENES
 export const alternativePicture = agrouser

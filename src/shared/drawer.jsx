@@ -9,7 +9,7 @@ function Drawer() {
 
 
   return (
-    <div className={`w-[300px] lg:hidden fixed h-screen  top-0 z-20  bg-white bg-opacity-90 ${open ? 'left-0': 'left-[-100%]'}`}>
+    <div className={`w-[300px] lg:hidden fixed h-screen  top-0 z-30  bg-white bg-opacity-90 ${open ? 'left-0': 'left-[-100%]'}`}>
       <div className='flex justify-end pe-4 mt-2 '>
         <CloseIcon onClick={toggleDrawer(false)} className='bg-black text-white rounded-md z-20' size={35} />
       </div>
@@ -23,6 +23,9 @@ function Drawer() {
           </li>
           <li>
             <Link to='/contact' className='font-bold text-lg'>Contactanos</Link>
+          </li>
+          <li>
+            <Link to='/product_detail' className='font-bold text-lg'>D Product</Link>
           </li>
         </ul>
       </Flex>

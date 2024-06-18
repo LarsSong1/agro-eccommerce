@@ -20,7 +20,7 @@ function ProductCard({className}) {
                     <p>Categoria</p>
                 </div>
                 <div className='basis-[50%] text-end'>
-                    <p className='opacity-60'>$24.50</p>
+                    <p className='opacity-60 line-through'>$24.50</p>
                     <p className='font-bold'>$12.50</p>
                 </div>
             </div>
