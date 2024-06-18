@@ -17,6 +17,8 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
+import { TbCarCrane } from "react-icons/tb";
+import { FiTrash } from "react-icons/fi";
 
 // LOGOS
 export const googleLogo = glogo
@@ -39,6 +41,8 @@ export const BackArrowIcon = IoIosArrowRoundBack
 export const HearthIcon = CiHeart
 export const AddIcon = IoMdAdd
 export const StarIcon = FaStar
+export const CarTransportIcon = TbCarCrane
+export const TrashIcon = FiTrash
 
 // IMANGENES
 export const alternativePicture = agrouser

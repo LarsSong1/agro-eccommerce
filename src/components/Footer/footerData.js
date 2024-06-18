@@ -4,14 +4,14 @@ export const footerData = {
         {
             title: 'P. principales',
             links: [
-                {href: '/home', name: 'Inicio'},
-                {href: '/productos', name: 'Productos'}, 
+                {href: '/', name: 'Inicio'},
+                {href: '/shop', name: 'Productos'}, 
             ]
         },
         {
             title: 'P unicas',
             links: [
-                {href: '/productos', name: 'Detalles Productos'},
+                {href: '/product_detail', name: 'Detalles Productos'},
                 
             ]
         },

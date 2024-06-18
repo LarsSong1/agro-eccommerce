@@ -13,6 +13,7 @@ import { DrawerProvider } from './context/DrawerContext'
 import Contact from './Pages/Contact/Contact'
 import Shop from './Pages/Shop/Shop'
 import ProductDetail from './Pages/ProductDetail/ProductDetail'
+import PayData from './Pages/PayData/PayData'
 
 
 
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
         <Route path='/contact' element={<Contact />}></Route>
         <Route path='/shop' element={<Shop />}></Route>
         <Route path='/product_detail' element={<ProductDetail />}></Route>
+        <Route path='/pay' element={<PayData/>}></Route>
       </Route>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/register' element={<Register />}></Route>

@@ -27,6 +27,9 @@ function Drawer() {
           <li>
             <Link to='/product_detail' className='font-bold text-lg'>D Product</Link>
           </li>
+          <li>
+            <Link to='/pay' className='font-bold text-lg'>Pagos</Link>
+          </li>
         </ul>
       </Flex>
     </div>

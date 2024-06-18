@@ -52,6 +52,7 @@ function Navbar() {
                     <Link className='lg:block hidden' to='/'>Inicio</Link>
                     <Link className='lg:block hidden' to='/shop'>Productos</Link>
                     <Link className='lg:block hidden' to='/product_detail'>D Products</Link>
+                    <Link className='lg:block hidden' to='/pay'>Pagos</Link>
                     <img className='w-16 h-16 lg:hidden mx-auto block' src={agrozamLogo} alt="logo" />
                 </div>
                 <div className='navbar-end w-[20%]'>
