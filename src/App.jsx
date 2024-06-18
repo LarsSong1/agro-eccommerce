@@ -26,7 +26,7 @@ const Layout = () => {
             <Drawer />
             <Navbar />
             <Outlet />
-            {/* <ScrollRestoration /> */}
+            <ScrollRestoration />
             <Footer />
 
           </section>
