@@ -13,7 +13,7 @@ function Navbar() {
     const { toggleDrawer } = useContext(DrawerContext);
 
     const { user } = useContext(AuthContext)
-    console.log(user)
+    // console.log(user)
     let username = ''
     let imgProfile = alternativePicture
     if (user) {
@@ -59,7 +59,6 @@ function Navbar() {
                     {
                         user ? (
                             <>
-
                                 <BtnShop className='hidden lg:block' />
 
                                 <Avatar classDiv='rounded-full w-10 z-20' imgSrc={imgProfile} />

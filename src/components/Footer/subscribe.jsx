@@ -9,9 +9,9 @@ function Subscribe() {
         <h3 className="text-2xl font-medium">{newsletter.heading}</h3>
         <input
           type="text"
-          sizeClass="h-12 px-0 py-3"
+          
           rounded="rounded-none"
-          className="border-b-2 border-transparent border-b-neutral-400 bg-transparent placeholder:text-sm placeholder:text-neutral-200 focus:border-transparent"
+          className="border-b-2 border-transparent border-b-neutral-400 bg-transparent placeholder:text-sm placeholder:text-neutral-200 focus:border-transparent h-12 px-0 py-3"
           placeholder="Your email@email.com"
         />
       </div>

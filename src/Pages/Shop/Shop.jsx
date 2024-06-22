@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Grid from '../../components/Grid'
 import Flex from '../../components/Flex'
 import Badges from '../../shared/badges'
@@ -8,9 +8,11 @@ import BtnIcon from '../../shared/btnIcon'
 import { FilterIcon, FilterIcon2 } from '../../assets/content'
 import ProductCard from '../../shared/productCard'
 import BestProducts from '../../shared/BestProducts'
+import CategoryContext from '../../context/CategoryContext'
 
 function Shop() {
   const [activeBadge, setActiveBadge] = useState('All')
+  const { categoryName } = useContext(CategoryContext)
 
   const categories = [
     'All',
@@ -39,10 +41,10 @@ function Shop() {
           </div>
           <div className='mt-10'>
             <Flex className='flex flex-wrap items-center gap-2 w-full'>
-              {categories.map((category) => (
+              {categoryName.map((category) => (
                 <Badges
                   key={category}
-                  text={category}
+                  text={category.name}
                   active={activeBadge === category}
                   onClick={() => handleFilter(category)}
                 />
@@ -58,18 +60,18 @@ function Shop() {
         <div className='lg:col-span-8 col-span-10 ps-8 pe-8 lg:pe-0 lg:ps-9'>
           <Flex className='flex gap-2 flex-wrap'>
             <InputSearch className='grow mb-2' />
-            <BtnIcon text='filtros' icon={<FilterIcon/>}/>
-            <BtnIcon text='Más popular' icon={<FilterIcon2/>}/>
+            <BtnIcon text='filtros' icon={<FilterIcon />} />
+            <BtnIcon text='Más popular' icon={<FilterIcon2 />} />
           </Flex>
           <Grid className='mt-10 gap-10 grid lg:grid-cols-3 grid-cols-1 place-items-center'>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
 
           </Grid>
         </div>
-        <BestProducts className='mt-20'/>
+        <BestProducts className='mt-20' />
       </Grid>
     </section>
   )
