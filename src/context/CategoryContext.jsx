@@ -14,7 +14,7 @@ export const CategoryProvider = ({ children }) => {
         try {
             let { data: category, error } = await supabase
                 .from('Category')
-                .select('name')
+                .select('*')
                                         
             if (error) {
                 setCategoryError('Category not found')

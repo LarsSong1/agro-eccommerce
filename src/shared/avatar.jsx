@@ -6,7 +6,7 @@ function Avatar({ classDiv, imgSrc, classImg }) {
     const [showItems, setShowItems] = useState('hidden')
 
     const controlProfile = (e)=>{
-        setShowItems(current => current === 'hidden' ? 'block' : 'hidden');
+        setShowItems(current => current === 'hidden' ? 'block ' : 'hidden');
     }
 
     return (
@@ -14,7 +14,7 @@ function Avatar({ classDiv, imgSrc, classImg }) {
             <div className={classDiv} >
                 <img className={classImg} src={imgSrc} alt='avatar' />
             </div>
-            <div className='bg-white absolute top-14 right-4 rounded-md p-2  border-black'>
+            <div className={`bg-white absolute top-14 right-4 rounded-md ${showItems ? 'p-0': 'p-2'} border-black`}>
                 <Menu className={showItems} text='Profile'/>  
             </div>
         </div>

@@ -5,42 +5,140 @@ import { toast } from 'sonner'
 
 
 const DataContext = createContext({
-    newProducts: []
+    newProducts: [],
+    allProducts: [],
+    bestProducts: [],
 })
 
 
 export const DataProvider = ({ children }) => {
     const [newProducts, setNewProduct] = useState([])
-    const [loadingData , setLoadingData] = useState(true)
+    const [allProducts, setAllProducts] = useState([])
+    const [bestProducts, setBestProducts] = useState([])
+    const [pagination, setPagination] = useState(0)
+    const [loadingData, setLoadingData] = useState(true)
+    const limit = 8
+
 
 
     const getNewProduct = async () => {
         try {
             let { data: Products, error } = await supabase.
                 from('Products')
-                .select('*')
+                .select(`*,
+                    Category (
+                        name
+                    )
+                    `)
                 .eq('new_product', true);
-    
+
             if (error) {
                 toast.error('Error al obtener new Product');
                 setLoadingData(true);
-            }else{
+            } else {
                 setNewProduct(Products);
                 setLoadingData(false)
             }
-    
-    
+
+
         } catch (err) {
             throw new Error(err);
         }
     }
 
-    useEffect(()=>{
-      getNewProduct();
-    },[])
+
+    const getAllProducts = async (limit, pagination) => {
+        try {
+            let { data: Products, error } = await supabase
+                .from('Products')
+                .select(`*,
+                    Category (
+                        name
+                    )
+                `)
+                .range(pagination, pagination + limit - 1)
+
+            if (error) {
+                toast.error('No hay Productos')
+                setLoadingData(true)
+            } else {
+                setAllProducts(prevProduct => [...prevProduct, ...Products])
+                setLoadingData(false)
+            }
+
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
+
+    const loadMoreProducts = async () => {
+        const newPagination = pagination + limit;
+        await getAllProducts(limit, newPagination);
+        setPagination(newPagination);
+    }
+
+
+    const getBestProducts = async () => {
+        try {
+            let { data: BestProducts, error } = await supabase
+                .from('Products')
+                .select(`*,
+                    Category (
+                        name
+                    )
+                    
+                    `)
+                .eq('best_product', true)
+
+
+            if (error) {
+                toast.error('Error al obtener Best P.')
+                setLoadingData(true)
+            } else {
+                setBestProducts(BestProducts)
+            }
+        } catch (err) {
+            throw new Error(err)
+
+
+        }
+    }
+
+
+    const getProductId = async (product_id) => {
+        try {
+            let { data: Product, error } = await supabase
+                .from('Products')
+                .select(`*, 
+                Category (
+                    name
+                )
+            `)
+                .eq('id', product_id)
+                .single()
+
+            if (error) {
+                toast.error('Error al obtener producto')
+            }else {
+                return Product
+            }
+        } catch (err) {
+            throw new Error(err)
+        }
+
+        
+
+
+    }
+
+    useEffect(() => {
+        getNewProduct();
+        getAllProducts(limit, 0);
+        getBestProducts();
+    }, [])
 
     return (
-        <DataContext.Provider value={{newProducts, loadingData}}>
+        <DataContext.Provider value={{ newProducts, loadingData, allProducts, bestProducts, loadMoreProducts, getProductId }}>
             {children}
         </DataContext.Provider>
     )

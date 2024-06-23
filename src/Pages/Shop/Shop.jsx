@@ -63,7 +63,7 @@ function Shop() {
             <BtnIcon text='filtros' icon={<FilterIcon />} />
             <BtnIcon text='Más popular' icon={<FilterIcon2 />} />
           </Flex>
-          <Grid className='mt-10 gap-10 grid lg:grid-cols-3 grid-cols-1 place-items-center'>
+          <Grid className='mt-10 gap-10 grid lg:grid-cols-2 grid-cols-1 xl:grid-cols-3 place-items-center'>
             <ProductCard />
             <ProductCard />
             <ProductCard />

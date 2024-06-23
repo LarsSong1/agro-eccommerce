@@ -19,6 +19,7 @@ import { IoMdAdd } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 import { TbCarCrane } from "react-icons/tb";
 import { FiTrash } from "react-icons/fi";
+import { AiOutlineShopping } from "react-icons/ai";
 
 // LOGOS
 export const googleLogo = glogo
@@ -43,6 +44,7 @@ export const AddIcon = IoMdAdd
 export const StarIcon = FaStar
 export const CarTransportIcon = TbCarCrane
 export const TrashIcon = FiTrash
+export const ShopIcon = AiOutlineShopping
 
 // IMANGENES
 export const alternativePicture = agrouser

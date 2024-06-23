@@ -11,6 +11,8 @@ import BestProducts from '../../shared/BestProducts';
 import { useNavigate } from 'react-router-dom';
 import CategoryContext from '../../context/CategoryContext';
 import NewProduct from '../../components/Home/newProduct';
+import { CallActionData } from './callActionData';
+import DataContext from '../../context/DataContext';
 
 
 
@@ -24,8 +26,10 @@ function Home() {
 
     const { user, loading } = useContext(AuthContext)
     const { categoryName } = useContext(CategoryContext)
-    const [ loadingState, setLoadingState ] = useState(true)
-   
+    const [loadingState, setLoadingState] = useState(true)
+    const { allProducts, loadMoreProducts } = useContext(DataContext)
+    const navigate = useNavigate()
+
 
 
     useEffect(() => {
@@ -36,7 +40,6 @@ function Home() {
     }, [loading])
 
 
-    const navigate = useNavigate()
 
     const logoutApp = async () => {
         await logout();
@@ -54,6 +57,8 @@ function Home() {
     }
 
 
+
+    console.log(allProducts)
     return (
         <section className='w-full'>
             {user ? (
@@ -65,11 +70,13 @@ function Home() {
 
                         </Flex>
                         <Flex className='col-span-6 lg:col-span-4 m-4 lg:m-0 flex bg-customYellow h-[350px] lg:h-[500px] rounded-xl relative overflow-hidden'>
-                            <div className='p-6 lg:p-12 w-full'>
-                                <h2 className='lg:font-bold font-black text-black text-lg lg:text-2xl xl:text-4xl w-full lg:w-2/3 mb-0 lg:mb-10'>Mensaje Call To Action Lorem ipsum dolor sitt.</h2>
-                                <p className='text-base lg:text-xl font-light line-clamp-2 xl:line-clamp-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta hic explicabo iste ratione expedita dignissimos pariatur culpa! Est velit incidunt magni, similique fugiat fugit mollitia culpa, voluptas animi explicabo modi.</p>
+                            <Flex className='p-6 lg:p-12 w-full flex flex-col justify-between'>
+                                <div>
+                                    <h2 className='lg:font-bold font-black text-black text-lg lg:text-2xl xl:text-4xl w-full lg:w-2/3 mb-0 lg:mb-10 line-clamp-5'>{CallActionData.title}</h2>
+                                    <p className='text-base lg:text-xl font-light line-clamp-3 xl:line-clamp-6'>{CallActionData.desccription}</p>
+                                </div>
                                 <BtnBlack text='Contactanos' className='lg:w-2/3 w-[130px] lg:h-1/6 mt-4 mb-4' onClick={() => navigate('/contact')} />
-                            </div>
+                            </Flex>
                             <img className='absolute h-[15em] lg:h-[18em] bottom-[-0.5em] lg:top-0 right-0' src={zanahoriaImage} alt="zanahoria-img" />
 
 
@@ -82,8 +89,8 @@ function Home() {
                                 <select className="w-[250px] ps-4 focus:rounded-l-2xl">
                                     <option defaultValue='Elige Opción'>Bioestimulantes</option>
                                     {
-                                        categoryName.map((category, id)=>(
-                                            <option key={id}>{category.name}</option>
+                                        categoryName.map((category) => (
+                                            <option key={category.id}>{category.name}</option>
                                         ))
                                     }
 
@@ -99,17 +106,31 @@ function Home() {
 
                             </Flex>
                             <Flex className='mt-10 flex flex-wrap gap-4 justify-center'>
-                                <ProductCard className='' />
-                                <ProductCard className='' />
-                                <ProductCard className='' />
-                                <ProductCard className='' />
-                                <ProductCard className='' />
-                                <ProductCard className='' />
-                                <ProductCard className='' />
-                                <ProductCard className='' />
+                                {
+                                    allProducts.map((product) => (
+                                        <ProductCard
+                                            keyid={product.id}
+                                            name={product.name}
+                                            category_name={product.Category.name}
+                                            src={product.img_url}
+                                            offer={product.offert}
+                                            price={product.price}
+                                            realPrice={product.real_price}
+                                            onClick={()=>navigate(`/product_detail/${product.id}`)}
+
+                                        />
+                                    ))
+                                }
 
 
                             </Flex>
+
+
+                            <Flex className='w-full mt-10  flex justify-center'>
+                                <BtnBlack text='Ver más' onClick={loadMoreProducts} className='' />
+                            </Flex>
+
+
                         </div>
 
 
