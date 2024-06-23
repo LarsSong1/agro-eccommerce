@@ -56,7 +56,7 @@ function NewProduct() {
                             <BtnBlack className='mt-4 lg:w-2/4 w-[130px] lg:h-1/6 mb-4' text='Ver Productos' onClick={() => navigate('/shop')} />
                         </Flex>
                         <div className='w-2/6 relative overflow-hidden'>
-                            <img className='relative lg:absolute top-0 lg:top-10 h-[400px] lg:h-[500px]' src={oneProduct.img_url} alt="product" />
+                            <img onClick={()=>navigate(`products/${oneProduct.id}`)} className='cursor-pointer relative lg:absolute top-0 lg:top-10 h-[400px] lg:h-[500px]' src={oneProduct.img_url} alt="product" />
                         </div>
 
                     </>

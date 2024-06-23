@@ -1,34 +1,56 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Grid from '../../components/Grid'
 import Flex from '../../components/Flex'
 import Badges from '../../shared/badges'
 import InputSearch from '../../shared/inputSearch'
 import Range from '../../shared/range'
 import BtnIcon from '../../shared/btnIcon'
-import { FilterIcon, FilterIcon2 } from '../../assets/content'
+import { CleanFilterIcon, FilterIcon2 } from '../../assets/content'
 import ProductCard from '../../shared/productCard'
 import BestProducts from '../../shared/BestProducts'
 import CategoryContext from '../../context/CategoryContext'
+import DataContext from '../../context/DataContext'
+import BtnBlack from '../../shared/btnBlack'
+import { useNavigate } from 'react-router-dom'
+
 
 function Shop() {
-  const [activeBadge, setActiveBadge] = useState('All')
   const { categoryName } = useContext(CategoryContext)
+  const { productsNoLimit } = useContext(DataContext)
+  
+  const [activeBadge, setActiveBadge] = useState('All')
+  const [ dataProducts, setDataProducts ] = useState([])
+  const [filterCategory, setFilterCategory] = useState('')
+  const [filterInput, setFilterInput] = useState('')
+  const navigate = useNavigate()
 
-  const categories = [
-    'All',
-    'Bioestimulantes',
-    'Mejoras del Suelo',
-    'Fertilizantes',
-    'Nutrientes',
-    'C. Plagas',
-    'Promotores de Crecimiento',
-    'Mejoras de Estructura',
-  ];
-
-  const handleFilter = (category) => {
+  const handleFilter = (category, categoryName) => {
     setActiveBadge(category)
-    console.log(category)
+    setFilterCategory(categoryName)
   }
+
+
+  useEffect(() => {
+    let filteredProducts = productsNoLimit;
+
+    if (filterCategory) {
+      filteredProducts = filteredProducts.filter(product => product.Category.name === filterCategory);
+    }
+
+    if (filterInput) {
+      filteredProducts = filteredProducts.filter(product =>
+        product.name.toLowerCase().includes(filterInput.toLowerCase())
+      );
+    }
+
+    setDataProducts(filteredProducts);
+
+
+  
+
+}, [filterCategory, productsNoLimit, filterInput]);
+
+  console.log(filterInput)
 
 
   return (
@@ -46,7 +68,7 @@ function Shop() {
                   key={category}
                   text={category.name}
                   active={activeBadge === category}
-                  onClick={() => handleFilter(category)}
+                  onClick={() => handleFilter(category, category.name)}
                 />
               ))}
             </Flex>
@@ -59,15 +81,27 @@ function Shop() {
         </Flex>
         <div className='lg:col-span-8 col-span-10 ps-8 pe-8 lg:pe-0 lg:ps-9'>
           <Flex className='flex gap-2 flex-wrap'>
-            <InputSearch className='grow mb-2' />
-            <BtnIcon text='filtros' icon={<FilterIcon />} />
-            <BtnIcon text='Más popular' icon={<FilterIcon2 />} />
+            <InputSearch className='grow mb-2' onChange={(e)=>setFilterInput(e.target.value)}/>
+            <BtnIcon text='filtros' icon={<CleanFilterIcon />} onClick={()=>setDataProducts(productsNoLimit)}/>
+            {/* <BtnIcon text='Más popular' icon={<FilterIcon2 />} /> */}
           </Flex>
           <Grid className='mt-10 gap-10 grid lg:grid-cols-2 grid-cols-1 xl:grid-cols-3 place-items-center'>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {dataProducts.map(product => (
+              <ProductCard
+                keyid={product.id}
+                name={product.name}
+                category_name={product.Category.name}
+                src={product.img_url}
+                offer={product.offert}
+                price={product.price}
+                realPrice={product.real_price}
+                onClick={() => navigate(`/products/${product.id}`)}
+              />
+            ))}
+
+           
+              
+
 
           </Grid>
         </div>

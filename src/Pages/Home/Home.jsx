@@ -26,8 +26,10 @@ function Home() {
 
     const { user, loading } = useContext(AuthContext)
     const { categoryName } = useContext(CategoryContext)
-    const [loadingState, setLoadingState] = useState(true)
     const { allProducts, loadMoreProducts } = useContext(DataContext)
+    const [loadingState, setLoadingState] = useState(true)
+    const [ dataProducts, setDataProducts ] = useState([])
+    const [filterCategory, setFilterCategory] = useState('')
     const navigate = useNavigate()
 
 
@@ -35,9 +37,23 @@ function Home() {
     useEffect(() => {
         if (!loading) {
             setLoadingState(false)
-
         }
+
+       
+        
+
+
     }, [loading])
+
+
+    useEffect(() => {
+        if (filterCategory) {
+            const filteredProducts = allProducts.filter(product => product.Category.name === filterCategory);
+            setDataProducts(filteredProducts);
+        } else {
+            setDataProducts(allProducts);
+        }
+    }, [filterCategory, allProducts]);
 
 
 
@@ -59,6 +75,7 @@ function Home() {
 
 
     console.log(allProducts)
+    console.log(categoryName)
     return (
         <section className='w-full'>
             {user ? (
@@ -86,8 +103,8 @@ function Home() {
                             <h1 className='mx-auto text-2xl lg:text-6xl text-black font-bold text-center'>Insumos Agricolas</h1>
                             <p className='text-center text-xl mt-2 mb-10'>A tu disposición</p>
                             <Flex className='flex rounded-2xl w-[360px] items-center border-t-0 border-2 h-[50px]  border-customGray mx-auto'>
-                                <select className="w-[250px] ps-4 focus:rounded-l-2xl">
-                                    <option defaultValue='Elige Opción'>Bioestimulantes</option>
+                                <select className="w-[250px] ps-4 focus:rounded-l-2xl" onChange={e=>setFilterCategory(e.target.value)}>
+                                    <option value=''>Elige opción</option>
                                     {
                                         categoryName.map((category) => (
                                             <option key={category.id}>{category.name}</option>
@@ -97,7 +114,7 @@ function Home() {
 
 
                                 </select>
-                                <div className='w-[120px] mx-auto me-1 justify-center flex items-center bg-customGray h-[40px]  rounded-r-2xl '>
+                                <div onClick={()=>setDataProducts(allProducts)} className=' cursor-pointer w-[120px] mx-auto me-1 justify-center flex items-center bg-customGray h-[40px]  rounded-r-2xl '>
                                     <p className='inline-flex text-xs font-bold'>
                                         Limpiar Filtro
                                         <CleanFilterIcon className='ms-2 mt-[0.5px]' />
@@ -107,7 +124,7 @@ function Home() {
                             </Flex>
                             <Flex className='mt-10 flex flex-wrap gap-4 justify-center'>
                                 {
-                                    allProducts.map((product) => (
+                                    dataProducts.map((product) => (
                                         <ProductCard
                                             keyid={product.id}
                                             name={product.name}
@@ -116,7 +133,7 @@ function Home() {
                                             offer={product.offert}
                                             price={product.price}
                                             realPrice={product.real_price}
-                                            onClick={()=>navigate(`/product_detail/${product.id}`)}
+                                            onClick={()=>navigate(`/products/${product.id}`)}
 
                                         />
                                     ))

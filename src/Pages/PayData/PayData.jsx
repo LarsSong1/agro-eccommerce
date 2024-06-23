@@ -65,9 +65,9 @@ function PayData() {
                             </Flex>
 
                         </div>
-                        <div className='mt-10 inline-flex gap-4'>
+                        <div className='mt-10 inline-flex gap-4 w-full justify-end'>
                             <BtnCustomized text='Guardar' className='text-white bg-black w-[100px] rounded-xl flex justify-center cursor-pointer items-center pt-2 pb-2' />
-                            <BtnCustomized text='Cancelar' className='text-black cursor-pointer w-[100px] rounded-xl flex justify-center items-center pt-2 pb-2' />
+                            <BtnCustomized text='Cancelar' className='text-black cursor-pointer w-[100px] rounded-xl flex justify-center border-black border-2 items-center pt-2 pb-2' />
                         </div>
                     </div>
 

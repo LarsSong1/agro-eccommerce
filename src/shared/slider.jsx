@@ -63,7 +63,7 @@ function Slider() {
                         offer={product.offert}
                         price={product.price}
                         realPrice={product.real_price}
-                        onClick={()=>navigate(`/product_detail/${product.id}`)}
+                        onClick={()=>navigate(`/products/${product.id}`)}
 
                     />
                 </SwiperSlide>

@@ -11,16 +11,22 @@ import DataContext from '../../context/DataContext'
 function ProductDetail() {
     const navigate = useNavigate()
     const { productId } = useParams()
+    const { getProductId } = useContext(DataContext)
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(true)
-    const { getProductId } = useContext(DataContext)
 
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetchProduct = async () => {
-            const productFetched = await getProductId(productId);
-            setProduct(productFetched)
-            setLoading(false)
+            console.log(productId, typeof productId)
+            setLoading(true)
+            if (productId) {
+                const productFetched = await getProductId(productId);
+                if (productFetched) {
+                    setProduct(productFetched)
+                    setLoading(false)
+                }
+            }
         }
 
 
@@ -52,18 +58,22 @@ function ProductDetail() {
                     </Flex>
                 </div>
                 <div className='lg:col-span-5 col-span-10 bg-customGray h-[300px] lg:h-[590px] relative overflow-hidden lg:rounded-md rounded-lg lg:p-0 lg:m-0 ms-8 me-8'>
-                    <img className=' w-full absolute object-contain h-full lg:-bottom-20 -bottom-14 -right-20' src={quicelum} alt="Product" />
+                    <img className=' w-full absolute object-contain h-full lg:-bottom-20 -bottom-14 -right-20' src={product.img_url} alt="Product" />
                 </div>
                 <div className='lg:col-span-5 col-span-10 lg:space-y-5 lg:mt-0 mt-4 lg:p-10 lg:pt-0 ps-8 pe-8 '>
-                    <h3 className='text-customBrown font-medium'>OFERTA</h3>
-                    <h1 className='text-6xl text-black mt-2 font-bold'>Quicelum</h1>
+                    <h3 className={`text-customBrown font-medium ${product.offert ? 'block' : 'hidden'}`}>OFERTA</h3>
+                    <h1 className='text-6xl text-black mt-2 font-bold'>{product.name}</h1>
                     <Flex className='mt-4 flex items-center '>
                         <div className='w-2 h-2 rounded-full opacity-55 bg-black'></div>
-                        <p className='text-sm ms-4 text-black opacity-75'>Categoria</p>
+                        <p className='text-sm ms-4 text-black opacity-75'>{product.Category.name}</p>
                     </Flex>
+                    <div className='inline-flex mt-2'>
+                        <p className='font-bold'>Disponible:</p>
+                        <p className='ms-4'>{product.stock}</p>
+                    </div>
                     <div className='lg:mt-4 lg:text-start text-end'>
-                        <h5 className='line-through opacity-50 text-mlg'>$22.50</h5>
-                        <h4 className='text-4xl text-black font-bold '>$12.50</h4>
+                        <h5 className='line-through opacity-50 text-mlg'>{product.real_price}</h5>
+                        <h4 className='text-4xl text-black font-bold '>{product.price}</h4>
                     </div>
                     <Flex className='mt-8 flex justify-between items-center lg:space-y-20'>
                         <HearthIcon className='self-end' size={30} />
@@ -83,16 +93,16 @@ function ProductDetail() {
                     <h3 className='font-bold text-2xl text-black lg:mt-0 mt-4'>Información del Producto</h3>
                     <div className='inline-flex mt-2 gap-4'>
                         <h5 className='border-b-2 border-customOrange cursor-pointer font-bold'>Descripción</h5>
-                        <h5 className='opacity-75 font-extralight cursor-pointer'>Detalles del Producto</h5>
+                        {/* <h5 className='opacity-75 font-extralight cursor-pointer'>Detalles del Producto</h5> */}
                     </div>
                     <div className='mt-6 opacity-85 font-light text-sm'>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere, nibh non ornare euismod, felis arcu iaculis arcu, nec malesuada massa justo ac risus. Donec euismod est congue, lacinia libero iaculis, suscipit massa. Duis congue elementum mi, in rutrum quam laoreet ut. Vivamus quis libero fermentum, facilisis tellus vitae, suscipit nisl. Maecenas cursus malesuada turpis, in </p>
+                        <p>{product.description}</p>
                     </div>
 
 
                     <div className='space-y-5 mt-10'>
                         <h5 className='font-bold'>Nota*</h5>
-                        <p className='opacity-85 text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere, nibh non ornare euismod, felis arcu iaculis arcu, nec malesuada massa justo ac risus. Donec euismod est congue, lacinia libero iaculis, suscipit massa. Duis congue elementum mi, in rutrum quam laoreet ut. Vivamus quis libero fermentum, facilisis tellus vitae, suscipit nisl. Maecenas cursus malesuada turpis, in </p>
+                        <p className='opacity-85 text-sm'>{product.note}</p>
                     </div>
 
                 </div>

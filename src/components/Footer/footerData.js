@@ -11,7 +11,7 @@ export const footerData = {
         {
             title: 'P unicas',
             links: [
-                {href: '/product_detail', name: 'Detalles Productos'},
+                {href: '/pay', name: 'Pagos'},
                 
             ]
         },

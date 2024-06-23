@@ -8,6 +8,7 @@ const DataContext = createContext({
     newProducts: [],
     allProducts: [],
     bestProducts: [],
+    productsNoLimit: []
 })
 
 
@@ -15,6 +16,7 @@ export const DataProvider = ({ children }) => {
     const [newProducts, setNewProduct] = useState([])
     const [allProducts, setAllProducts] = useState([])
     const [bestProducts, setBestProducts] = useState([])
+    const [productsNoLimit, setProductsNoLimit] = useState([])
     const [pagination, setPagination] = useState(0)
     const [loadingData, setLoadingData] = useState(true)
     const limit = 8
@@ -57,12 +59,47 @@ export const DataProvider = ({ children }) => {
                     )
                 `)
                 .range(pagination, pagination + limit - 1)
+             
 
             if (error) {
                 toast.error('No hay Productos')
                 setLoadingData(true)
             } else {
-                setAllProducts(prevProduct => [...prevProduct, ...Products])
+                const combinedProducts = [...allProducts, ...Products];
+                const uniqueProducts = Array.from(new Set(combinedProducts.map(product => product.id)))
+                    .map(id => {
+                        return combinedProducts.find(product => product.id === id);
+                    });
+                setAllProducts(uniqueProducts);
+                setLoadingData(false)
+            }
+
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
+
+
+    const getProductsNoLimit = async () => {
+        try {
+            let { data: Products, error } = await supabase
+                .from('Products')
+                .select(`*,
+                    Category (
+                        name
+                    )
+                `)
+
+            if (error) {
+                toast.error('No hay Productos')
+                setLoadingData(true)
+            } else {
+                const combinedProducts = [...allProducts, ...Products];
+                const uniqueProducts = Array.from(new Set(combinedProducts.map(product => product.id)))
+                    .map(id => {
+                        return combinedProducts.find(product => product.id === id);
+                    });
+                setProductsNoLimit(uniqueProducts);
                 setLoadingData(false)
             }
 
@@ -119,26 +156,24 @@ export const DataProvider = ({ children }) => {
 
             if (error) {
                 toast.error('Error al obtener producto')
+                console.error(error)
             }else {
                 return Product
             }
         } catch (err) {
             throw new Error(err)
         }
-
-        
-
-
     }
 
     useEffect(() => {
         getNewProduct();
         getAllProducts(limit, 0);
         getBestProducts();
+        getProductsNoLimit();
     }, [])
 
     return (
-        <DataContext.Provider value={{ newProducts, loadingData, allProducts, bestProducts, loadMoreProducts, getProductId }}>
+        <DataContext.Provider value={{ newProducts, loadingData, allProducts, bestProducts, loadMoreProducts, getProductId, productsNoLimit }}>
             {children}
         </DataContext.Provider>
     )

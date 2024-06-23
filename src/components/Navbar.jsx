@@ -43,7 +43,6 @@ function Navbar() {
                 <div className="navbar-center flex gap-2 grow lg:justify-center lg:w-[60%] ms-4">
                     <Link className='lg:block hidden' to='/'>Inicio</Link>
                     <Link className='lg:block hidden' to='/shop'>Productos</Link>
-                    <Link className='lg:block hidden' to='/product_detail'>D Products</Link>
                     <Link className='lg:block hidden' to='/pay'>Pagos</Link>
                     <img className='w-16 h-16 lg:hidden mx-auto block' src={agrozamLogo} alt="logo" />
                 </div>
