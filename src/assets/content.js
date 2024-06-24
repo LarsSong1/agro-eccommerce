@@ -20,11 +20,13 @@ import { FaStar } from "react-icons/fa";
 import { TbCarCrane } from "react-icons/tb";
 import { FiTrash } from "react-icons/fi";
 import { AiOutlineShopping } from "react-icons/ai";
+import facebookImage from './icons/facebook.svg'
 
 // LOGOS
 export const googleLogo = glogo
 export const agrozamLogo = agrologo
 export const whatsappLogo = whatsapp
+export const facebookLogo = facebookImage
 
 
 // ICONOS

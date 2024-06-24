@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import BtnShop from './btnShop'
 import { CartIcon, ExitIcon, ProfileIcon } from '../assets/content'
 import { logout } from '../services/supabase/Auth'
+import DrawerContext from '../context/DrawerContext'
 
 function Menu({ text, url, span, className }) {
+
+    const { toggleCartDrawer } = useContext(DrawerContext)
 
     return (
 

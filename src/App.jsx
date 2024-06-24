@@ -17,6 +17,8 @@ import PayData from './Pages/PayData/PayData'
 import { CategoryProvider } from './context/CategoryContext'
 import { Toaster } from 'sonner'
 import { DataProvider } from './context/DataContext'
+import Cart from './Pages/Cart/Cart'
+import CartDrawer from './shared/cartDrawer'
 
 
 
@@ -31,6 +33,7 @@ const Layout = () => {
               <section className='max-w-[1920px] mx-auto relative flex flex-col items-center'>
 
                 <Drawer />
+                <CartDrawer/>
                 <Navbar />
                 <Outlet />
                 <ScrollRestoration />
@@ -55,6 +58,7 @@ const router = createBrowserRouter(
         <Route path='/shop' element={<Shop />}></Route>
         <Route path='/products/:productId' element={<ProductDetail />}></Route>
         <Route path='/pay' element={<PayData />}></Route>
+        <Route path='/cart' element={<Cart/>}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Route>
       <Route path='/login' element={<Login />}></Route>

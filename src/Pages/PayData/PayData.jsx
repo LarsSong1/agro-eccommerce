@@ -6,8 +6,10 @@ import BtnCustomized from '../../shared/btnCustomized'
 import Input from '../../shared/Input'
 import ProductOrderCard from '../../shared/productOrderCard'
 import BtnBlack from '../../shared/btnBlack'
+import { useNavigate } from 'react-router-dom'
 
 function PayData() {
+    const navigate = useNavigate()
     return (
         <section className='w-full'>
             <Grid className='mt-28 lg:w-[80%] grid mx-auto grid-cols-6 lg:grid-cols-10 w-[85%] lg:gap-5 mb-10'>
@@ -27,7 +29,7 @@ function PayData() {
                         <CarTransportIcon size={30} className='basis-[10$] opacity-70 self-start' />
                         <Flex className='flex justify-between items-center basis-[90%] ms-2'>
                             <div>
-                                <h4 className='text-sm'>INFORMACION DE CONTACTO</h4>
+                                <h4 className='text-sm'>INFORMACION DE ENVIO</h4>
                                 <p className='font-bold text-sm'>Naranjal idk </p>
                             </div>
                             <BtnCustomized className='border-[1.5px] cursor-pointer border-black text-sm rounded-2xl p-2 ps-4 pe-4' text='Editar' />
@@ -67,7 +69,7 @@ function PayData() {
                         </div>
                         <div className='mt-10 inline-flex gap-4 w-full justify-end'>
                             <BtnCustomized text='Guardar' className='text-white bg-black w-[100px] rounded-xl flex justify-center cursor-pointer items-center pt-2 pb-2' />
-                            <BtnCustomized text='Cancelar' className='text-black cursor-pointer w-[100px] rounded-xl flex justify-center border-black border-2 items-center pt-2 pb-2' />
+                            <BtnCustomized text='Cancelar' className='text-black cursor-pointer w-[100px] rounded-xl flex justify-center border-black border-2 items-center pt-2 pb-2' onClick={()=>navigate('/')} />
                         </div>
                     </div>
 
@@ -87,7 +89,7 @@ function PayData() {
                         </Flex>
                         <Flex className='flex items-center justify-between mb-4'>
                             <p className='text-sm'>Delivery y Empaquetado</p>
-                            <p className='font-bold text-sm'>Free</p>
+                            <p className='font-bold text-sm'>Valores Apartes</p>
                         </Flex>
                         <Flex className='flex items-center justify-between mb-4'>
                             <p className='text-sm font-bold'>Total</p>

@@ -13,6 +13,7 @@ function Navbar() {
 
     const { toggleDrawer } = useContext(DrawerContext);
     const { user } = useContext(AuthContext)
+    const { toggleCartDrawer } = useContext(DrawerContext)
     
 
     let username = ''
@@ -44,13 +45,16 @@ function Navbar() {
                     <Link className='lg:block hidden' to='/'>Inicio</Link>
                     <Link className='lg:block hidden' to='/shop'>Productos</Link>
                     <Link className='lg:block hidden' to='/pay'>Pagos</Link>
+                    <Link className='lg:block hidden' to='/cart'>Carrito</Link>
                     <img className='w-16 h-16 lg:hidden mx-auto block' src={agrozamLogo} alt="logo" />
                 </div>
                 <div className='navbar-end w-[20%]'>
                     {
                         user ? (
                             <>
-                                <BtnShop className='hidden lg:block' />
+                                <BtnShop className='hidden lg:block' 
+                                onClick={toggleCartDrawer(true)}
+                                />
 
                                 <Avatar classDiv='rounded-full w-10 z-20' imgSrc={imgProfile} />
                                 <p className='lg:block hidden ms-2'>{username}</p>
