@@ -5,6 +5,7 @@ import { Autoplay } from 'swiper/modules';
 import ProductCard from './productCard';
 import DataContext from '../context/DataContext';
 import { useNavigate } from 'react-router-dom';
+import CartContext from '../context/CartContext';
 
 
 function Slider() {
@@ -66,6 +67,8 @@ function Slider() {
                         onClick={()=>navigate(`/products/${product.id}`)}
 
                     />
+
+                    
                 </SwiperSlide>
             ))}
 

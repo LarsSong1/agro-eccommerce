@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Grid from '../../components/Grid'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { BackArrowIcon, CartIcon, HearthIcon, ShopIcon, quicelum } from '../../assets/content'
 import Flex from '../../components/Flex'
 import Counter from '../../shared/counter'
 import Progress from '../../shared/progress'
 import BestProducts from '../../shared/BestProducts'
 import DataContext from '../../context/DataContext'
+import CartContext from '../../context/CartContext'
 
 function ProductDetail() {
     const navigate = useNavigate()
     const { productId } = useParams()
     const { getProductId } = useContext(DataContext)
+    const { addCartItems } = useContext(CartContext)
+
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -80,13 +83,13 @@ function ProductDetail() {
                         <Counter classNameIcon='bg-black rounded-full text-white w-8 h-8' />
                     </Flex>
                     <Flex className='flex w-full items-center space-y-10 gap-4'>
-                        <a className='grow basis-[50%] flex justify-center items-center pb-3 pt-3 rounded-xl self-end border-2 cursor-pointer border-black'>
+                        <a className='grow basis-[50%] flex justify-center items-center pb-3 pt-3 rounded-xl self-end border-2 cursor-pointer border-black' onClick={()=>addCartItems(product.id, 0)}>
                             <ShopIcon />
                             <p className='ps-2 '>Añadir</p>
                         </a>
-                        <a className='bg-black  basis-[50%] grow flex justify-center cursor-pointer items-center pb-4 pt-4 rounded-xl'>
+                        <Link to='/pay' className='bg-black  basis-[50%] grow flex justify-center cursor-pointer items-center pb-4 pt-4 rounded-xl'>
                             <p className='text-white'>Comprar Ahora</p>
-                        </a>
+                        </Link>
                     </Flex>
                 </div>
                 <div className='lg:col-span-5 mt-4 col-span-10 lg:p-0 ps-8 pe-8'>

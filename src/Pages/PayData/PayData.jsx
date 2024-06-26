@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Grid from '../../components/Grid'
 import Flex from '../../components/Flex'
 import { CarTransportIcon, ProfileIcon } from '../../assets/content'
@@ -7,9 +7,14 @@ import Input from '../../shared/Input'
 import ProductOrderCard from '../../shared/productOrderCard'
 import BtnBlack from '../../shared/btnBlack'
 import { useNavigate } from 'react-router-dom'
+import CartContext from '../../context/CartContext'
 
 function PayData() {
+    const { loading, cart } = useContext(CartContext) 
     const navigate = useNavigate()
+
+
+    console.log(cart)
     return (
         <section className='w-full'>
             <Grid className='mt-28 lg:w-[80%] grid mx-auto grid-cols-6 lg:grid-cols-10 w-[85%] lg:gap-5 mb-10'>
@@ -69,7 +74,7 @@ function PayData() {
                         </div>
                         <div className='mt-10 inline-flex gap-4 w-full justify-end'>
                             <BtnCustomized text='Guardar' className='text-white bg-black w-[100px] rounded-xl flex justify-center cursor-pointer items-center pt-2 pb-2' />
-                            <BtnCustomized text='Cancelar' className='text-black cursor-pointer w-[100px] rounded-xl flex justify-center border-black border-2 items-center pt-2 pb-2' onClick={()=>navigate('/')} />
+                            <BtnCustomized text='Cancelar' className='text-black cursor-pointer w-[100px] rounded-xl flex justify-center border-black border-2 items-center pt-2 pb-2' onClick={() => navigate('/')} />
                         </div>
                     </div>
 
@@ -77,9 +82,26 @@ function PayData() {
                 <div className='lg:col-span-5 col-span-10' >
                     <h5 className='font-bold mt-10 mb-4'>Resumen Ordenes</h5>
                     <Flex className='flex flex-col gap-4'>
-                        <ProductOrderCard />
-                        <ProductOrderCard />
-                        <ProductOrderCard />
+                        {loading ? (
+                            <p className='text-center mt-2'>Loading...</p>
+                        ) : (
+                            cart && cart.length > 0 ? (
+                                cart.map(cartP => (
+                                    <ProductOrderCard
+                                        key={cartP.id}
+                                        name={cartP.Products?.name}
+                                        category={cartP.Products?.Category?.name}
+                                        src={cartP.Products?.img_url}
+                                        quantity={cartP.quantity}
+                                           price={cartP.Products?.price}
+                                        cart_id={cartP.id}
+                                        product_id={cartP.product_id}
+                                    />
+                                ))
+                            ) : (
+                                <p className='text-center mt-2'>Your cart is empty</p>
+                            )
+                        )}
                     </Flex>
 
                     <div className='mt-10'>
@@ -97,7 +119,7 @@ function PayData() {
                         </Flex>
                     </div>
                     <div className='w-full'>
-                        <BtnBlack text='Confirmar compra' className='w-full'/>
+                        <BtnBlack text='Confirmar compra' className='w-full' />
                     </div>
                 </div>
 

@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { AddIcon } from '../assets/content'
 import Flex from '../components/Flex'
 
-function Counter({ classNameIcon }) {
-    const [number, setNumber] = useState(0)
+function Counter({ classNameIcon, quantity }) {
+    let numberState = quantity || 0
+    const [number, setNumber] = useState(numberState)
     return (
         <Flex className='flex items-center gap-8'>
             <div className='cursor-pointer' onClick={() => setNumber(number !== 0 ? number - 1 : number)}>

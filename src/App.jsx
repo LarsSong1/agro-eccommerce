@@ -19,6 +19,7 @@ import { Toaster } from 'sonner'
 import { DataProvider } from './context/DataContext'
 import Cart from './Pages/Cart/Cart'
 import CartDrawer from './shared/cartDrawer'
+import { CartProvider } from './context/CartContext'
 
 
 
@@ -28,21 +29,23 @@ const Layout = () => {
     <>
       <AuthProvider>
         <DataProvider>
-          <CategoryProvider>
-            <DrawerProvider>
-              <section className='max-w-[1920px] mx-auto relative flex flex-col items-center'>
+          <CartProvider>
+            <CategoryProvider>
+              <DrawerProvider>
+                <section className='max-w-[1920px] mx-auto relative flex flex-col items-center'>
 
-                <Drawer />
-                <CartDrawer/>
-                <Navbar />
-                <Outlet />
-                <ScrollRestoration />
-                <Footer />
-                <Toaster position='top-right' expand visibleToasts={1} />
+                  <Drawer />
+                  <CartDrawer />
+                  <Navbar />
+                  <Outlet />
+                  <ScrollRestoration />
+                  <Footer />
+                  <Toaster position='top-right' expand visibleToasts={2} duration={1500} />
 
-              </section>
-            </DrawerProvider>
-          </CategoryProvider>
+                </section>
+              </DrawerProvider>
+            </CategoryProvider>
+          </CartProvider>
         </DataProvider>
       </AuthProvider>
     </>
@@ -58,7 +61,7 @@ const router = createBrowserRouter(
         <Route path='/shop' element={<Shop />}></Route>
         <Route path='/products/:productId' element={<ProductDetail />}></Route>
         <Route path='/pay' element={<PayData />}></Route>
-        <Route path='/cart' element={<Cart/>}></Route>
+        <Route path='/cart' element={<Cart />}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Route>
       <Route path='/login' element={<Login />}></Route>

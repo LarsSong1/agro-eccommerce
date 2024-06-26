@@ -48,7 +48,6 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-
     const getAllProducts = async (limit, pagination) => {
         try {
             let { data: Products, error } = await supabase
@@ -78,7 +77,6 @@ export const DataProvider = ({ children }) => {
             throw new Error(err);
         }
     }
-
 
     const getProductsNoLimit = async () => {
         try {
@@ -114,7 +112,6 @@ export const DataProvider = ({ children }) => {
         setPagination(newPagination);
     }
 
-
     const getBestProducts = async () => {
         try {
             let { data: BestProducts, error } = await supabase
@@ -141,7 +138,6 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-
     const getProductId = async (product_id) => {
         try {
             let { data: Product, error } = await supabase
@@ -164,6 +160,9 @@ export const DataProvider = ({ children }) => {
             throw new Error(err)
         }
     }
+
+
+
 
     useEffect(() => {
         getNewProduct();
