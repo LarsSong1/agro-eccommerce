@@ -17,18 +17,13 @@ export const ProfileProvider = ({ children }) => {
     const [profileId, setProfileId] = useState(null)
 
 
-    const getProfileData = async () => {
-        const { data: { user }, error } = await supabase.auth.getUser();
-
-        if (user) {
-            setProfileId(user.id)
-        }
+    const getProfileData = async (userId) => {
 
 
         const { data: profileInfo, error: profileError } = await supabase
             .from('profiles')
             .select('*')
-            .eq('id', profileId)
+            .eq('id', userId)
             .single();
 
 
@@ -48,7 +43,7 @@ export const ProfileProvider = ({ children }) => {
     const updateProfile = async (data) => {
         
         try {
-            let { data: Profile, error } = await supabase
+            let { data: profileUpdated, error } = await supabase
                 .from('profiles')
                 .update(data)
                 .eq('id', profileId)
@@ -58,8 +53,11 @@ export const ProfileProvider = ({ children }) => {
             if (error) {
                 toast.error('Eror al actualizar los datos')
             } else {
-                setProfileData(Profile)
                 toast.success('Datos actualizados correctamente')
+                console.log(profileUpdated)
+                // array 
+                setProfileData(profileUpdated[0])
+                return profileUpdated[0]
               
             }
         } catch (err) {
@@ -69,7 +67,14 @@ export const ProfileProvider = ({ children }) => {
 
 
     useEffect(() => {
-        getProfileData()
+        const fetchProfileId = async () => {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (user) {
+                setProfileId(user.id);
+                await getProfileData(user.id);
+            }
+        };
+        fetchProfileId();
     }, [])
 
     return (

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import BtnShop from './btnShop'
 import { CartIcon, ExitIcon, ProfileIcon } from '../assets/content'
 import { Logout } from '../services/supabase/Auth'
@@ -8,8 +8,12 @@ import DrawerContext from '../context/DrawerContext'
 function Menu({ text, url, span, className }) {
 
     const { toggleCartDrawer } = useContext(DrawerContext)
+    const navigate = useNavigate()
 
-
+    const toggleSesion = ()=> {
+        Logout()
+        navigate('/login')
+    }
     
     return (
 
@@ -29,7 +33,7 @@ function Menu({ text, url, span, className }) {
                     </Link>
                 </li>
                 <li>
-                    <Link onClick={()=>Logout()}>
+                    <Link onClick={toggleSesion}>
                         <ExitIcon />
                         Salir
                     </Link>

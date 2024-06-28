@@ -30,7 +30,7 @@ export const CartProvider = ({ children }) => {
                 .single();
 
             if (createCartError) {
-                toast.error('No se pudo crear el carrito');
+                toast.error('Error al crear carrito');
                 setLoading(false);
                 return null;
             }
@@ -59,14 +59,14 @@ export const CartProvider = ({ children }) => {
             }
 
             if (errorIdCart) {
-                toast.error('No se pudo obtener el carrito');
+                toast.error('No hay carrito, creando');
                 setLoading(false);
                 return;
             }
 
             const { data: Product, error: productError } = await supabase
                 .from('Products')
-                .select('*')
+                .select('*, Category(*)')
                 .eq('id', product_id)
                 .single();
 
@@ -79,7 +79,7 @@ export const CartProvider = ({ children }) => {
             const { data: Cart_item, error } = await supabase
                 .from('Cart_items')
                 // .insert([{ cart_id: Cart.id, product_id, quantity }])
-                .upsert([{ cart_id: Cart.id, product_id, quantity }])
+                .upsert([{ cart_id: Cart.id, product_id, quantity}])
                 .select()
                 .single();
 

@@ -77,7 +77,7 @@ function ProductDetail() {
                         <Counter classNameIcon='bg-black rounded-full text-white w-8 h-8' />
                     </Flex>
                     <Flex className='flex w-full items-center space-y-10 gap-4'>
-                        <a className='grow basis-[50%] flex justify-center items-center pb-3 pt-3 rounded-xl self-end border-2 cursor-pointer border-black' onClick={()=>addCartItems(product.id, 0)}>
+                        <a className='grow basis-[50%] flex justify-center items-center pb-3 pt-3 rounded-xl self-end border-2 cursor-pointer border-black' onClick={()=>addCartItems(product.id, 0, product.Category.name)}>
                             <ShopIcon />
                             <p className='ps-2 '>Añadir</p>
                         </a>

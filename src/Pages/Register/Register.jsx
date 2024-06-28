@@ -44,8 +44,14 @@ function Register() {
         username: username
       }
       await updateProfileUsername(dataUser)
+
+      if (user){
+        navigate('/')
+      }
       
     }
+
+
 
   }
   return (
