@@ -17,25 +17,26 @@ function FormLogin() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const { user } = useContext(AuthContext)
+
 
 
     const loginGoogle = async (e) => {
         e.preventDefault();
-        await logInWithGoogle()
+        await logInWithGoogle();
 
     }
 
-    const loginWithEmail = async (e) => {
+   const loginWithEmail = async (e) => {
         e.preventDefault();
-        await signIn({ email, password });
-        navigate('/')
-
-
+        const user = await signIn({ email, password });
+        if (user){
+            navigate('/');
+        }
 
     }
 
-    console.log(email, password)
+
+  
 
 
 

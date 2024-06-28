@@ -8,6 +8,7 @@ import Progress from '../../shared/progress'
 import BestProducts from '../../shared/BestProducts'
 import DataContext from '../../context/DataContext'
 import CartContext from '../../context/CartContext'
+import BackPage from '../../shared/backPage'
 
 function ProductDetail() {
     const navigate = useNavigate()
@@ -21,7 +22,6 @@ function ProductDetail() {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            console.log(productId, typeof productId)
             setLoading(true)
             if (productId) {
                 const productFetched = await getProductId(productId);
@@ -53,13 +53,7 @@ function ProductDetail() {
     return (
         <section className='w-full mt-20'>
             <Grid className='lg:mt-10 mt-2 lg:w-[80%] grid mx-auto grid-cols-6 lg:grid-cols-10 gap-2 lg:gap-10'>
-                <div className='w-full col-span-10 lg:p-0 ps-8 pe-8'>
-                    <Flex className='bg-customGray rounded-full w-[45px] flex justify-center'
-                        onClick={() => navigate(-1)}
-                    >
-                        <BackArrowIcon size={40} color='black' />
-                    </Flex>
-                </div>
+                <BackPage/>
                 <div className='lg:col-span-5 col-span-10 bg-customGray h-[300px] lg:h-[590px] relative overflow-hidden lg:rounded-md rounded-lg lg:p-0 lg:m-0 ms-8 me-8'>
                     <img className=' w-full absolute object-contain h-full lg:-bottom-20 -bottom-14 -right-20' src={product.img_url} alt="Product" />
                 </div>

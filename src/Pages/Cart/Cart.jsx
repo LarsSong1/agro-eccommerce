@@ -1,20 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Grid from '../../components/Grid'
 import ProductOrderCard from '../../shared/productOrderCard'
 import Flex from '../../components/Flex'
 import BtnCustomized from '../../shared/btnCustomized'
 import CartContext from '../../context/CartContext'
 import { useNavigate } from 'react-router-dom'
+import BackPage from '../../shared/backPage'
 
 
 function Cart() {
-    const { cart, getCartItems, loading } = useContext(CartContext)
+    const { cart, loading } = useContext(CartContext)
+    const [ valueOrder, setValueOrder ] = useState(0)
     const navigate = useNavigate()
+    
+    useEffect(()=>{
+        let totalOrders = 0
+        cart.forEach(data =>{
+            totalOrders += parseFloat(data.Products.price) * data.quantity;
+        })
+        setValueOrder(totalOrders)
+    },[cart])
+
+
+
+    
 
     return (
         <section className='w-full'>
             <Grid className='mt-28 lg:w-[80%] grid mx-auto grid-cols-6 lg:grid-cols-10 gap:2 lg:gap-4'>
-                <div className='col-span-full font-bold text-2xl border-b-2 border-black border-opacity-25 pb-4 lg:w-full w-[90%] mx-auto'>
+                <BackPage/>
+                <div className='mt-2 col-span-full font-bold text-2xl border-b-2 border-black border-opacity-25 pb-4 lg:w-full w-[90%] mx-auto'>
                     <h2>Tu Carrito</h2>
                 </div>
                 <Flex className=' lg:col-span-5 flex flex-col gap-4 col-span-6 mx-auto mt-4 lg:mt-0 lg:w-full w-[90%]'>
@@ -35,7 +50,7 @@ function Cart() {
                                 />
                             ))
                         ) : (
-                            <p className='text-center mt-2'>Your cart is empty</p>
+                            <p className='text-center mt-2'>Tu carrito esta vacio</p>
                         )
                     )}
                 </Flex>
@@ -44,7 +59,7 @@ function Cart() {
                     <div className='mt-4 space-y-4'>
                         <Flex className='flex justify-between pb-4 border-b-2 border-black border-opacity-10'>
                             <h5 className='font-light'>Subtotal</h5>
-                            <p className='font-bold'>$12.20</p>
+                            <p className='font-bold'>${valueOrder}</p>
                         </Flex>
                         <Flex className='flex justify-between pb-4 border-b-2 border-black border-opacity-10'>
                             <h5 className='font-light'>Delivery y Empaquetado</h5>

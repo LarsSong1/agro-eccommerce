@@ -24,7 +24,7 @@ function Navbar() {
             imgProfile = user.avatar_url || alternativePicture
 
         } else {
-            console.log('no hay Nombre')
+            console.log('No username')
         }
     }
 

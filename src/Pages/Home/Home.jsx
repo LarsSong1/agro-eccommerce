@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../context/AutContext'
-import { logout } from '../../services/supabase/Auth';
+import { Logout } from '../../services/supabase/Auth';
 import Grid from '../../components/Grid';
 import BtnBlack from '../../shared/btnBlack';
 import { CleanFilterIcon, quicelum, zanahoriaImage } from '../../assets/content';
@@ -28,7 +28,6 @@ function Home() {
     const { user, loading, profile } = useContext(AuthContext)
     const { categoryName } = useContext(CategoryContext)
     const { allProducts, loadMoreProducts } = useContext(DataContext)
-    const { cart, addCartItems } = useContext(CartContext)
 
     const [loadingState, setLoadingState] = useState(true)
     const [dataProducts, setDataProducts] = useState([])
@@ -36,14 +35,17 @@ function Home() {
 
     const navigate = useNavigate()
 
-    
+
 
     useEffect(() => {
         if (!loading) {
             setLoadingState(false)
         }
 
-    
+
+
+
+
 
     }, [loading])
 
@@ -60,13 +62,10 @@ function Home() {
     }, [filterCategory, allProducts]);
 
 
- 
-    console.log(user)
 
 
-    const logoutApp = async () => {
-        await logout();
-    };
+
+
 
 
 
@@ -79,9 +78,10 @@ function Home() {
         )
     }
 
-   
+
     // console.log(allProducts)
     // console.log(categoryName)
+    console.log(dataProducts)
     return (
         <section className='w-full'>
             {user ? (
@@ -132,6 +132,7 @@ function Home() {
                                 {
                                     dataProducts.map((product) => (
                                         <ProductCard
+                                            key={product.id}
                                             keyid={product.id}
                                             name={product.name}
                                             category_name={product.Category.name}
@@ -140,12 +141,12 @@ function Home() {
                                             price={product.price}
                                             realPrice={product.real_price}
                                             onClick={() => navigate(`/products/${product.id}`)}
-                    
+
 
                                         />
                                     ))
 
-                                  
+
                                 }
 
 

@@ -50,8 +50,6 @@ function Shop() {
 
 }, [filterCategory, productsNoLimit, filterInput]);
 
-  console.log(filterInput)
-
 
   return (
     <section className='w-full mt-28 mx-auto'>
@@ -65,7 +63,7 @@ function Shop() {
             <Flex className='flex flex-wrap items-center gap-2 w-full'>
               {categoryName.map((category) => (
                 <Badges
-                  key={category}
+                  key={category.id}
                   text={category.name}
                   active={activeBadge === category}
                   onClick={() => handleFilter(category, category.name)}

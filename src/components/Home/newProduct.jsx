@@ -38,9 +38,6 @@ function NewProduct() {
     }
 
 
-
-    console.log(oneProduct)
-
     return (
         <>
             {

@@ -7,8 +7,8 @@ function ProductCard({ className, offer, src, category_name, name, realPrice, pr
 
     const {addCartItems} = useContext(CartContext)
     return (
-        <div className={`card w-[320px] h-[400px] bg-white shadow-2xl relative ${className} cursor-pointer`}>
-            <div className='absolute top-2 right-2 z-10 bg-white rounded-full p-2' onClick={()=>addCartItems(keyid, 0)}>
+        <div key={keyid} className={`card w-[320px] h-[400px] bg-white shadow-2xl relative ${className} cursor-pointer`}>
+            <div className='absolute top-2 right-2 z-10 bg-white rounded-full p-2' onClick={()=>addCartItems(keyid, 1)}>
                 <CartIcon className='w-6 h-6'/>
             </div>
             <Flex className={`bg-black w-[120px] h-[50px] ${offer ? 'absolute' : 'hidden'} top-[-10px]  left-10 z-10 rounded-b-xl flex items-center justify-center`}>
@@ -23,8 +23,8 @@ function ProductCard({ className, offer, src, category_name, name, realPrice, pr
                     <p className='line-clamp-2 text-sm'>{category_name}</p>
                 </div>
                 <div className='basis-[50%] text-end'>
-                    <p className='opacity-60 line-through line-clamp-1'>{realPrice}</p>
-                    <p className='font-bold line-clamp-1 text-xl'>{price}</p>
+                    <p className='opacity-60 line-through line-clamp-1'>${realPrice}</p>
+                    <p className='font-bold line-clamp-1 text-xl'>${price}</p>
                 </div>
             </div>
         </div>

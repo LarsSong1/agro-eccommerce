@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Logout } from '../../services/supabase/Auth'
 
 
 function NotFound() {
@@ -30,6 +31,7 @@ function NotFound() {
               Inicio
             </button>
           </div>
+          <button onClick={()=>Logout()} className='btn mt-10'>Salir</button>
         </div>
       </div>
     </section>

@@ -43,34 +43,8 @@ function CartDrawer() {
 
       </Flex>
       <div className='lg:h-[80vh] h-[55vh] overflow-y-scroll pe-2 flex flex-col gap-4'>
-        {/* {cart && cart.length > 0 ? (
-          cart.map(cartP => (
-            // <ProductOrderCard 
-
-            // key={cartP.id} 
-            // name={cartP.Products.name} 
-            // category={cartP.Products.Category.name} 
-            // src={cartP.Products.img_url} 
-            // quantity={cartP.quantity} 
-            // price={cartP.Products.price} 
-            // cart_id={cartP.id} />
-            <ProductOrderCard
-              key={cartP.id}
-              name={cartP?.Products?.name || 'Producto'}
-              category={cartP?.Products?.Category?.name || 'Categoría'}
-              src={cartP?.Products?.img_url || ''}
-              quantity={cartP.quantity}
-              price={cartP?.Products?.price || 0}
-              cart_id={cartP.id}
-             
-            />
-          ))
-        ) : (
-          <p className='text-center mt-2'>Your cart is empty</p>
-        )} */}
-
         {loading ? (
-          <p className='text-center mt-2'>Loading...</p>
+          <p className='text-center mt-2'>Cargando...</p>
         ) : (
           cart && cart.length > 0 ? (
             cart.map(cartP => (
@@ -86,7 +60,7 @@ function CartDrawer() {
               />
             ))
           ) : (
-            <p className='text-center mt-2'>Your cart is empty</p>
+            <p className='text-center mt-2'>Tu carrito esta vacio</p>
           )
         )}
       </div>

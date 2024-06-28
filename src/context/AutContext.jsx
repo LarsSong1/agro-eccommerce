@@ -4,13 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'sonner';
 
 
-
-
-
-
 const AuthContext = createContext({
     user: null,
-    profile: null
+    profile: null,
+    loading: true
 
 });
 
@@ -23,26 +20,30 @@ export const AuthProvider = ({ children }) => {
 
 
     const checkUser = async () => {
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (error) {
+            toast.error(`${error.message}`);
+            setLoading(false);
+            return
+        }
 
-        const { data: { user } } = await supabase.auth.getUser();
-        const { data: profileData, error } = await supabase
+        const { data: profileData, error: profileError } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', user.id)
             .single();
 
-        if (user) {
-            setUser(user.user_metadata);
-            setLoading(false)
-            navigate('/', { replace: true });
-            setProfile(profileData);
-
-        } else {
-            setUser(null);
-            setLoading(true)
-            toast.error('Usuario no encontrado')
-
+        if (profileError) {
+            toast.error('Error al obtener Perfil')
+            setProfile(null)
+            return
         }
+
+
+        setUser(user.user_metadata);
+        setProfile(profileData);
+
+
     };
 
 
@@ -57,17 +58,44 @@ export const AuthProvider = ({ children }) => {
                 if (!session) {
                     setUser(null);
                     setLoading(true);
-                    navigate('/login');
+                    navigate('/login')
 
 
                 } else {
                     setUser(session.user.user_metadata);
                     setLoading(false)
                     navigate('/', { replace: true });
-
                 }
             }
         );
+        // const { data: authListener } = supabase.auth.onAuthStateChange(
+        //     async (event, session) => {
+        //         setLoading(true);
+        //         if (!session) {
+        //             setUser(null);
+        //             setProfile(null);
+        //             setLoading(false);
+        //             navigate('/login');
+        //         } else {
+        //             const { data: profileData, error } = await supabase
+        //                 .from('profiles')
+        //                 .select('*')
+        //                 .eq('id', session.user.id)
+        //                 .single();
+
+        //             if (error) {
+        //                 toast.error('Error al obtener el perfil');
+        //                 setUser(null);
+        //                 setProfile(null);
+        //             } else {
+        //                 setUser(session.user);
+        //                 setProfile(profileData);
+        //             }
+        //             setLoading(false);
+        //             navigate('/', { replace: true });
+        //         }
+        //     }
+        // );
 
         checkUser();
 
@@ -96,3 +124,5 @@ export const AuthUsers = () => {
 
 
 export default AuthContext;
+
+
