@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { logInWithGoogle, signUp, updateProfile } from '../../services/supabase/Auth';
+import { logInWithGoogle, signUp, updateProfileUsername } from '../../services/supabase/Auth';
 import { Link, useNavigate } from 'react-router-dom';
 import BtnBlack from '../../shared/btnBlack';
 import Input from '../../shared/Input';
@@ -12,7 +12,7 @@ import AuthContext from '../../context/AutContext';
 
 
 function Register() {
-  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -31,19 +31,19 @@ function Register() {
     }
     const result = await signUp(userFormData)
     const userObject = await supabase.auth.getUser()
-    // console.log(user)
+    console.log(result.user)
 
-    if (result && result.data && result.data.user) {
+    if (result && result.user) {
       // const { data: { user } } = await supabase.auth.getUser()
       toast.success('Usuario Creado')
-      const user = result.data.user
+      const user = result.user
       const idUser = user.id
 
       const dataUser = {
         id: idUser,
-        full_name: name
+        username: username
       }
-      await updateProfile(dataUser)
+      await updateProfileUsername(dataUser)
       
     }
 
@@ -56,7 +56,7 @@ function Register() {
         <Toaster position='top-right' expand visibleToasts={2} duration={1500} />
         <img className='w-24 h-24 mx-auto' src={agrozamLogo} alt="logo" />
         <h1 className="text-xl font-bold text-black text-center">Crea cuenta en Agrozam</h1>
-        <Input label='Usuario' type='text' placeholder='Nombre de Usuario' onChange={e => setName(e.target.value)} />
+        <Input label='Usuario' type='text' placeholder='Nombre de Usuario' onChange={e => setUsername(e.target.value)} />
         <Input label='Correo' type='text' placeholder='Correo Electrónico' onChange={e => setEmail(e.target.value)} />
         <Input label='Contraseña' type='password' placeholder='Ingresa tu contraseña' onChange={e => setPassword(e.target.value)} />
 

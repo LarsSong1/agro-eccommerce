@@ -68,34 +68,7 @@ export const AuthProvider = ({ children }) => {
                 }
             }
         );
-        // const { data: authListener } = supabase.auth.onAuthStateChange(
-        //     async (event, session) => {
-        //         setLoading(true);
-        //         if (!session) {
-        //             setUser(null);
-        //             setProfile(null);
-        //             setLoading(false);
-        //             navigate('/login');
-        //         } else {
-        //             const { data: profileData, error } = await supabase
-        //                 .from('profiles')
-        //                 .select('*')
-        //                 .eq('id', session.user.id)
-        //                 .single();
-
-        //             if (error) {
-        //                 toast.error('Error al obtener el perfil');
-        //                 setUser(null);
-        //                 setProfile(null);
-        //             } else {
-        //                 setUser(session.user);
-        //                 setProfile(profileData);
-        //             }
-        //             setLoading(false);
-        //             navigate('/', { replace: true });
-        //         }
-        //     }
-        // );
+      
 
         checkUser();
 

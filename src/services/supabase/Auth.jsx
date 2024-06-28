@@ -20,9 +20,9 @@ export const signUp = async (dataForm) => {
 }
 
 
-export const updateProfile = async (data) => {
+export const updateProfileUsername = async (data) => {
     try {
-        await supabase.from('profiles').upsert(data);
+        await supabase.from('profiles').upsert(data).select();   
     } catch (err) {
         console.error(err);
     }

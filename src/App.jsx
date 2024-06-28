@@ -20,6 +20,8 @@ import { DataProvider } from './context/DataContext'
 import Cart from './Pages/Cart/Cart'
 import CartDrawer from './shared/cartDrawer'
 import { CartProvider } from './context/CartContext'
+import Profile from './Pages/Profile/Profile'
+import { ProfileProvider } from './context/ProfileContext'
 
 
 
@@ -29,23 +31,25 @@ const Layout = () => {
     <>
       <AuthProvider>
         <DataProvider>
-          <CartProvider>
-            <CategoryProvider>
-              <DrawerProvider>
-                <section className='max-w-[1920px] mx-auto relative flex flex-col items-center'>
+          <ProfileProvider>
+            <CartProvider>
+              <CategoryProvider>
+                <DrawerProvider>
+                  <section className='max-w-[1920px] mx-auto relative flex flex-col items-center'>
 
-                  <Drawer />
-                  <CartDrawer />
-                  <Navbar />
-                  <Outlet />
-                  <ScrollRestoration />
-                  <Footer />
-                  <Toaster position='top-right' expand visibleToasts={2} duration={1500} />
+                    <Drawer />
+                    <CartDrawer />
+                    <Navbar />
+                    <Outlet />
+                    <ScrollRestoration />
+                    <Footer />
+                    <Toaster position='top-right' expand visibleToasts={2} duration={1500} />
 
-                </section>
-              </DrawerProvider>
-            </CategoryProvider>
-          </CartProvider>
+                  </section>
+                </DrawerProvider>
+              </CategoryProvider>
+            </CartProvider>
+          </ProfileProvider>
         </DataProvider>
       </AuthProvider>
     </>
@@ -62,6 +66,7 @@ const router = createBrowserRouter(
         <Route path='/products/:productId' element={<ProductDetail />}></Route>
         <Route path='/pay' element={<PayData />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Route>
       <Route path='/login' element={<Login />}></Route>
