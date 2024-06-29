@@ -21,6 +21,7 @@ import { TbCarCrane } from "react-icons/tb";
 import { FiTrash } from "react-icons/fi";
 import { AiOutlineShopping } from "react-icons/ai";
 import facebookImage from './icons/facebook.svg'
+import { IoMdRemove } from "react-icons/io";
 
 // LOGOS
 export const googleLogo = glogo
@@ -43,6 +44,7 @@ export const FilterIcon2 = IoFilter
 export const BackArrowIcon = IoIosArrowRoundBack
 export const HearthIcon = CiHeart
 export const AddIcon = IoMdAdd
+export const RemoveIcon = IoMdRemove
 export const StarIcon = FaStar
 export const CarTransportIcon = TbCarCrane
 export const TrashIcon = FiTrash

@@ -87,6 +87,7 @@ export const CartProvider = ({ children }) => {
             if (existingCartItem) {
                 toast.error('El producto ya está en el carrito');
                 setLoading(false);
+                set
                 return;
             }
 
@@ -103,6 +104,8 @@ export const CartProvider = ({ children }) => {
                 // });
                 setLoading(false);
             }
+
+
         } catch (err) {
             toast.error('Error al añadir al carrito');
             setLoading(false);
@@ -173,6 +176,7 @@ export const CartProvider = ({ children }) => {
 
 
     const updateQuantity = (cartId, quantity) => {
+        console.log(quantity);
         setCart(prevCart =>
             prevCart.map(item =>
                 item.id === cartId ? { ...item, quantity } : item

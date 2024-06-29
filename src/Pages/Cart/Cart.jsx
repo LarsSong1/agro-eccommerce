@@ -22,7 +22,7 @@ function Cart() {
     },[cart])
 
 
-
+    console.log(cart.Products)
     
 
     return (
@@ -47,6 +47,7 @@ function Cart() {
                                     price={cartP.Products?.price}
                                     cart_id={cartP.id}
                                     product_id={cartP.product_id}
+                                    stock={cartP.Products.stock}
                                 />
                             ))
                         ) : (
@@ -59,7 +60,7 @@ function Cart() {
                     <div className='mt-4 space-y-4'>
                         <Flex className='flex justify-between pb-4 border-b-2 border-black border-opacity-10'>
                             <h5 className='font-light'>Subtotal</h5>
-                            <p className='font-bold'>${valueOrder}</p>
+                            <p className='font-bold'>${valueOrder.toFixed(2)}</p>
                         </Flex>
                         <Flex className='flex justify-between pb-4 border-b-2 border-black border-opacity-10'>
                             <h5 className='font-light'>Delivery y Empaquetado</h5>

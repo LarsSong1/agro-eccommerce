@@ -5,7 +5,7 @@ import Counter from './counter'
 import CartContext from '../context/CartContext'
 import { useNavigate } from 'react-router-dom'
 
-function ProductOrderCard({ name, price, category, src, alt, quantity, cart_id, product_id }) {
+function ProductOrderCard({ name, price, category, src, alt, quantity, cart_id, product_id, stock }) {
     const { deleteCartItems } = useContext(CartContext)
     const navigate = useNavigate()
 
@@ -27,6 +27,7 @@ function ProductOrderCard({ name, price, category, src, alt, quantity, cart_id, 
                             <p className='font-bold'>${price}</p>
                         </Flex>
                         <p>{category}</p>
+                        <p><span className='font-bold'>Stock: </span>{stock}</p>
                     </div>
                 
                     <Flex className='flex justify-between'>
@@ -35,7 +36,9 @@ function ProductOrderCard({ name, price, category, src, alt, quantity, cart_id, 
                             <TrashIcon className='text-black w-4 h-4 cursor-pointer' onClick={deleteItemCart} />
                         </Flex>
                         <Flex>
-                            <Counter cartId={cart_id} quantity={quantity} classNameIcon='rounded-full border-[.1px] border-black' />
+                            <Counter cartId={cart_id} quantity={quantity} classNameIcon='rounded-full border-[.1px] border-black' 
+                            stock_item={stock}
+                            />
                         </Flex>
                     </Flex>
                 </Flex>

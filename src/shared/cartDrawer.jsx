@@ -57,6 +57,7 @@ function CartDrawer() {
                 price={cartP.Products?.price} 
                 cart_id={cartP.id}
                 product_id={cartP.product_id}
+                stock={cartP.Products.stock}
               />
             ))
           ) : (
