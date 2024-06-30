@@ -162,7 +162,12 @@ export const DataProvider = ({ children }) => {
     }
 
 
-
+    // const getProductExpired = async ()=> {
+    //     let {data: Product, error} = await supabase
+    //         .from('Products')
+    //         .select(`*`)
+    //         .eq()
+    // }
 
     useEffect(() => {
         getNewProduct();

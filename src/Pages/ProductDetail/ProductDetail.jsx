@@ -53,7 +53,7 @@ function ProductDetail() {
     return (
         <section className='w-full mt-20'>
             <Grid className='lg:mt-10 mt-2 lg:w-[80%] grid mx-auto grid-cols-6 lg:grid-cols-10 gap-2 lg:gap-10'>
-                <BackPage/>
+                <BackPage className='ps-8 pe-8'/>
                 <div className='lg:col-span-5 col-span-10 bg-customGray h-[300px] lg:h-[590px] relative overflow-hidden lg:rounded-md rounded-lg lg:p-0 lg:m-0 ms-8 me-8'>
                     <img className=' w-full absolute object-contain h-full lg:-bottom-20 -bottom-14 -right-20' src={product.img_url} alt="Product" />
                 </div>
@@ -77,7 +77,7 @@ function ProductDetail() {
                         <Counter classNameIcon='bg-black rounded-full text-white w-8 h-8' />
                     </Flex>
                     <Flex className='flex w-full items-center space-y-10 gap-4'>
-                        <a className='grow basis-[50%] flex justify-center items-center pb-3 pt-3 rounded-xl self-end border-2 cursor-pointer border-black' onClick={()=>addCartItems(product.id, 0, product.Category.name)}>
+                        <a className='grow basis-[50%] flex justify-center items-center pb-3 pt-3 rounded-xl self-end border-2 cursor-pointer border-black' onClick={()=>addCartItems(product.id, 1, product.Category.name)}>
                             <ShopIcon />
                             <p className='ps-2 '>Añadir</p>
                         </a>
