@@ -4,11 +4,12 @@ import Flex from '../components/Flex'
 import CartContext from '../context/CartContext'
 import { toast } from 'sonner'
 
-function Counter({ classNameIcon, quantity, cartId, stock_item }) {
+function Counter({ classNameIcon, quantity, cartId, stock_item, onQuantityChange }) {
     const {updateQuantity, cart} = useContext(CartContext)
     let numberState = quantity || 1
     const [number, setNumber] = useState(numberState)
     const [noAdd, setNoAdd] = useState(null)
+    
 
     useEffect(() => {
         if ( number <= stock_item  ){
@@ -17,6 +18,10 @@ function Counter({ classNameIcon, quantity, cartId, stock_item }) {
         }else {
             setNoAdd(true)
             toast.error('No hay mas en Stock')
+        }
+
+        if (onQuantityChange) {
+            onQuantityChange(number); 
         }
     }, [number]);
 

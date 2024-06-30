@@ -27,13 +27,15 @@ function Home() {
 
     const { user, loading, profile } = useContext(AuthContext)
     const { categoryName } = useContext(CategoryContext)
-    const { allProducts, loadMoreProducts } = useContext(DataContext)
+    const { allProducts, loadMoreProducts, expiredProduct } = useContext(DataContext)
 
     const [loadingState, setLoadingState] = useState(true)
     const [dataProducts, setDataProducts] = useState([])
     const [filterCategory, setFilterCategory] = useState('')
 
     const navigate = useNavigate()
+
+    console.log('expirado:',expiredProduct)
 
 
 
@@ -81,7 +83,7 @@ function Home() {
 
     // console.log(allProducts)
     // console.log(categoryName)
-    console.log(dataProducts)
+    // console.log(dataProducts)
     return (
         <section className='w-full'>
             {user ? (

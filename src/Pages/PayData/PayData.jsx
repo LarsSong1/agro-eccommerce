@@ -22,6 +22,7 @@ function PayData() {
 
                 <BackPage />
                 <h2 className='text-black font-bold text-2xl mt-2 col-span-10'>Pago</h2>
+                <p className='col-span-10 mb-1 text-sm opacity-50'>Estos son datos de tu perfil, puedes modificarlos y guardarlos</p>
                 <FormProfile classNameDiv='lg:col-span-5 col-span-10'/>
 
 
@@ -44,7 +45,7 @@ function PayData() {
                                         cart_id={cartP.id}
                                         product_id={cartP.product_id}
                                         stock={cartP.Products.stock}
-                                        
+
                                     />
                                 ))
                             ) : (

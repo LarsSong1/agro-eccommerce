@@ -18,6 +18,7 @@ function ProductDetail() {
 
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [quantity, setQuantity] = useState(1);
 
 
     useEffect(() => {
@@ -32,6 +33,7 @@ function ProductDetail() {
             }
         }
 
+        
 
         fetchProduct();
     }, [productId, getProductId])
@@ -44,6 +46,11 @@ function ProductDetail() {
             </div>
         )
     }
+
+
+    const handleQuantityChange = (newQuantity) => {
+        setQuantity(newQuantity); 
+    };
 
 
     console.log(product)
@@ -69,15 +76,15 @@ function ProductDetail() {
                         <p className='ms-4'>{product.stock}</p>
                     </div>
                     <div className='lg:mt-4 lg:text-start text-end'>
-                        <h5 className='line-through opacity-50 text-mlg'>{product.real_price}</h5>
-                        <h4 className='text-4xl text-black font-bold '>{product.price}</h4>
+                        <h5 className='line-through opacity-50 text-mlg'>${product.real_price}</h5>
+                        <h4 className='text-4xl text-black font-bold '>${product.price}</h4>
                     </div>
                     <Flex className='mt-8 flex justify-between items-center lg:space-y-20'>
                         <HearthIcon className='self-end' size={30} />
-                        <Counter classNameIcon='bg-black rounded-full text-white w-8 h-8' />
+                        <Counter classNameIcon='bg-black rounded-full text-white w-8 h-8' stock_item={product.stock} onQuantityChange={handleQuantityChange} />
                     </Flex>
                     <Flex className='flex w-full items-center space-y-10 gap-4'>
-                        <a className='grow basis-[50%] flex justify-center items-center pb-3 pt-3 rounded-xl self-end border-2 cursor-pointer border-black' onClick={()=>addCartItems(product.id, 1, product.Category.name)}>
+                        <a className='grow basis-[50%] flex justify-center items-center pb-3 pt-3 rounded-xl self-end border-2 cursor-pointer border-black' onClick={()=>addCartItems(product.id, quantity)}>
                             <ShopIcon />
                             <p className='ps-2 '>Añadir</p>
                         </a>

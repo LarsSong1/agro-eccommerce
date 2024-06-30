@@ -56,7 +56,7 @@ function Register() {
   }
   return (
 
-    <section className='grid place-items-center h-screen  w-full ps-8 pe-8 max-w-md mx-auto relative min-h-[700px]'>
+    <section className='grid place-items-center h-screen  w-full ps-8 pe-8 max-w-md mx-auto relative min-h-[600px]'>
 
       <form onSubmit={handleSubmit} className="flex justify-center flex-col w-[100%] lg:w-[400px] gap-2">
         <Toaster position='top-right' expand visibleToasts={2} duration={1500} />

@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { supabase } from "../services/supabase";
 import { toast } from 'sonner'
+import Push from 'push.js'
 
 
 
@@ -8,7 +9,8 @@ const DataContext = createContext({
     newProducts: [],
     allProducts: [],
     bestProducts: [],
-    productsNoLimit: []
+    productsNoLimit: [], 
+    expiredProducts: [],
 })
 
 
@@ -16,6 +18,7 @@ export const DataProvider = ({ children }) => {
     const [newProducts, setNewProduct] = useState([])
     const [allProducts, setAllProducts] = useState([])
     const [bestProducts, setBestProducts] = useState([])
+    const [expiredProduct, setExpiredProduct] = useState([])
     const [productsNoLimit, setProductsNoLimit] = useState([])
     const [pagination, setPagination] = useState(0)
     const [loadingData, setLoadingData] = useState(true)
@@ -162,22 +165,56 @@ export const DataProvider = ({ children }) => {
     }
 
 
-    // const getProductExpired = async ()=> {
-    //     let {data: Product, error} = await supabase
-    //         .from('Products')
-    //         .select(`*`)
-    //         .eq()
-    // }
+    const getProductExpired = async ()=> {
+        try {
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+    
+            // Formatear la fecha a 'YYYY-MM-DD' para comparar con la base de datos
+            const formattedYesterday = yesterday.toISOString().split('T')[0];
+    
+            let { data: Products, error } = await supabase
+                .from('Products')
+                .select(`*`)
+                .eq('expired_date', formattedYesterday);
+    
+            if (error) {
+                toast.error('Error al obtener productos expirados');
+                console.error(error);
+            } else {
+                if (Products && Products.length > 0) {
+                    Products.forEach(product => {
+                        // Enviar una notificación por cada producto expirado
+                        Push.create('Producto Expirado', {
+                            body: `${product.name} expira mañana`,
+                            icon: '/path/to/icon.png',
+                            timeout: 1000000,
+                            onClick: function () {
+                                window.location.href = `http://localhost:5173/`;
+                            }
+                        });
+                    });
+                }
+                setExpiredProduct(Products)
+                return Products;
+            }
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
+
 
     useEffect(() => {
         getNewProduct();
         getAllProducts(limit, 0);
         getBestProducts();
         getProductsNoLimit();
+        getProductExpired();
     }, [])
 
     return (
-        <DataContext.Provider value={{ newProducts, loadingData, allProducts, bestProducts, loadMoreProducts, getProductId, productsNoLimit }}>
+        <DataContext.Provider value={{ newProducts, loadingData, allProducts, bestProducts, loadMoreProducts, getProductId, productsNoLimit, expiredProduct }}>
             {children}
         </DataContext.Provider>
     )
