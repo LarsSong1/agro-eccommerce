@@ -5,16 +5,16 @@ import { dataContact } from './contactData'
 function Contact() {
     return (
         <section>
-            <div class="mt-20 lg:mt-36">
-                <div class="grid sm:grid-cols-2 items-center gap-16 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md text-black font-[sans-serif]">
+            <div className="mt-20 lg:mt-36">
+                <div className="grid sm:grid-cols-2 items-center gap-16 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md text-black font-[sans-serif]">
                     <div>
-                        <h1 class="text-3xl font-extrabold">{dataContact.title}</h1>
-                        <p class="text-sm text-gray-600 mt-3 ">{dataContact.callToAction}</p>
-                        <div class="mt-12">
-                            <h2 class="text-lg font-extrabold">Correo</h2>
-                            <ul class="mt-3">
-                                <li class="flex items-center">
-                                    <div class="bg-custom h-10 w-10 rounded-full flex items-center justify-center shrink-0">
+                        <h1 className="text-3xl font-extrabold">{dataContact.title}</h1>
+                        <p className="text-sm text-gray-600 mt-3 ">{dataContact.callToAction}</p>
+                        <div className="mt-12">
+                            <h2 className="text-lg font-extrabold">Correo</h2>
+                            <ul className="mt-3">
+                                <li className="flex items-center">
+                                    <div className="bg-custom h-10 w-10 rounded-full flex items-center justify-center shrink-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill='#007bff'
                                             viewBox="0 0 479.058 479.058">
                                             <path
@@ -22,24 +22,24 @@ function Contact() {
                                                 data-original="#000000" />
                                         </svg>
                                     </div>
-                                    <a target="blank" href="https://veilmail.io/e/FkKh7o" class="text-customBlue text-sm ml-3">
-                                        <small class="block">Correo electrónico</small>
+                                    <a target="blank" href="https://veilmail.io/e/FkKh7o" className="text-customBlue text-sm ml-3">
+                                        <small className="block">Correo electrónico</small>
                                         <strong>{dataContact.email}</strong>
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="mt-12">
-                            <h2 class="text-lg font-extrabold">Socials</h2>
-                            <ul class="flex mt-3 space-x-4">
-                                <li class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
+                        <div className="mt-12">
+                            <h2 className="text-lg font-extrabold">Socials</h2>
+                            <ul className="flex mt-3 space-x-4">
+                                <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
                                     <a href="https://www.facebook.com/guidoz1968" target='_blank'>
 
                                        <img className='w-8' src={dataContact.facebookIcon} alt="facebook Logo" />
                                     </a>
                                 </li>
                             
-                                <li class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
+                                <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
                                     <a href={`https://wa.me/${dataContact.whatsappNumber}?text=${dataContact.whatsappText}`} target='_blank'>
                                     <img className='w-8' src={dataContact.whatsappIcon} alt="facebook Logo" />
                                     </a>
@@ -48,7 +48,7 @@ function Contact() {
                         </div>
                     </div>
 
-                    <form action="https://fabform.io/f/xxxxx" method="post" class="ml-auo space-y-4">
+                    <form action="https://fabform.io/f/xxxxx" method="post" className="ml-auo space-y-4">
                         <input type='text' name="name" placeholder='Nombre'
                             className="w-full rounded-md py-2.5 px-4 border text-sm border-gray-600" />
                         <input type='email'
@@ -56,7 +56,7 @@ function Contact() {
                             placeholder='Correo Electrónico'
                             className="w-full rounded-md py-2.5 px-4 border text-sm border-gray-600" />
                         <input type='text' placeholder='Asunto'
-                            name='subject' class="w-full rounded-md py-2.5 px-4 border text-sm border-gray-600" />
+                            name='subject' className="w-full rounded-md py-2.5 px-4 border text-sm border-gray-600" />
                         <textarea placeholder='Mensaje' rows="6"
                             name='message'
                             className="w-full rounded-md px-4 border text-sm pt-2.5 border-gray-600"></textarea>

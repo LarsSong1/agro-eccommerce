@@ -9,14 +9,21 @@ import AuthContext from "./AutContext";
 const CartContext = createContext({
     cart: [],
     loading: false,
+    order: [],
+    orderData: [],
     getCartItems: () => { },
     addCartItems: () => { },
-    deleteCartItems: () => { }
+    deleteCartItems: () => { },
+    addOrder: () => { },
+    deleteOrder: () => { },
+    updateOrder: () => { }
 });
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [order, setOrder] = useState([]);
+    const [orderData, setOrderData] = useState([]);
     const { profile } = useContext(AuthContext);
 
 
@@ -79,7 +86,7 @@ export const CartProvider = ({ children }) => {
             const { data: Cart_item, error } = await supabase
                 .from('Cart_items')
                 // .insert([{ cart_id: Cart.id, product_id, quantity }])
-                .upsert([{ cart_id: Cart.id, product_id, quantity}])
+                .upsert([{ cart_id: Cart.id, product_id, quantity }])
                 .select()
                 .single();
 
@@ -184,14 +191,111 @@ export const CartProvider = ({ children }) => {
         );
     };
 
+
+
+    const addOrder = async (orderData) => {
+        const { cart_id, delivery_mount, total_mount, payed_mount } = orderData;
+        try {
+            const { data: Orders, error } = await supabase
+                .from('Orders')
+                .insert([{ cart_id, delivery_mount, total_mount, payed_mount }]) // Usar insert en lugar de upsert para nuevos registros
+                .select()
+                .single();
+
+            if (error) {
+                toast.error('No se pudo procesar el pedido');
+                console.error('Error details:', error);
+            } else {
+                setOrder(prevOrders => [...prevOrders, Orders]);
+                toast.success('Orden enviada');
+            }
+        } catch (err) {
+            toast.error('Error al procesar el pedido');
+            console.error('Catch error details:', err);
+        }
+    };
+
+
+    const deleteOrder = async (orderId) => {
+        try {
+            const { error } = await supabase
+                .from('Orders')
+                .delete()
+                .eq('id', orderId);
+
+            if (error) {
+                toast.error('No se pudo eliminar la orden');
+            } else {
+                setOrder(prevOrders => prevOrders.filter(order => order.id !== orderId));
+                toast.success('Orden eliminada');
+            }
+        } catch (err) {
+            toast.error('Error al eliminar la orden');
+            console.error(err);
+        }
+    };
+
+    const updateOrder = async (orderId, updateData) => {
+        try {
+            const { data: updatedOrder, error } = await supabase
+                .from('Orders')
+                .update(updateData)
+                .eq('id', orderId)
+                .select()
+                .single();
+
+            if (error) {
+                toast.error('No se pudo actualizar la orden');
+            } else {
+                setOrder(prevOrders => prevOrders.map(order => order.id === orderId ? updatedOrder : order));
+                toast.success('Orden actualizada');
+            }
+        } catch (err) {
+            toast.error('Error al actualizar la orden');
+            console.error(err);
+        }
+    };
+
+    const getOrders = async () => {
+        let { data: DataOrders, error } = await supabase
+            .from('Orders')
+            .select(`
+                *,
+                Cart(
+                    *,
+                    Cart_items(
+                        *,
+                        Products(
+                            *,
+                            Category(name)
+                        )
+                    ),
+                    profiles(*)
+                )
+            `);
+
+        if (error) {
+            toast.error('Error')
+        } else {
+            setOrderData(DataOrders)
+        }
+
+    }
+
+
     useEffect(() => {
         if (profile && profile.id) {
             getCartItems();
         }
-    }, [profile]);
+
+        if (orderData){
+            getOrders();
+        }
+
+    }, [profile, order]);
 
     return (
-        <CartContext.Provider value={{ cart, loading, getCartItems, deleteCartItems, addCartItems, updateQuantity }}>
+        <CartContext.Provider value={{ cart, loading, getCartItems, deleteCartItems, addCartItems, updateQuantity, addOrder, deleteOrder, updateOrder, orderData }}>
             {children}
         </CartContext.Provider>
     );

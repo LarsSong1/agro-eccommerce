@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { supabase } from "../services/supabase";
 import { toast } from 'sonner'
 import Push from 'push.js'
+import { agrozamLogo } from "../assets/content";
 
 
 
@@ -171,7 +172,6 @@ export const DataProvider = ({ children }) => {
             const yesterday = new Date(today);
             yesterday.setDate(yesterday.getDate() - 1);
     
-            // Formatear la fecha a 'YYYY-MM-DD' para comparar con la base de datos
             const formattedYesterday = yesterday.toISOString().split('T')[0];
     
             let { data: Products, error } = await supabase
@@ -188,7 +188,7 @@ export const DataProvider = ({ children }) => {
                         // Enviar una notificación por cada producto expirado
                         Push.create('Producto Expirado', {
                             body: `${product.name} expira mañana`,
-                            icon: '/path/to/icon.png',
+                            icon: agrozamLogo,
                             timeout: 1000000,
                             onClick: function () {
                                 window.location.href = `http://localhost:5173/`;

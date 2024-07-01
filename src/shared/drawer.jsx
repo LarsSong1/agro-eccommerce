@@ -24,7 +24,9 @@ function Drawer() {
           <li>
             <Link to='/contact' className='font-bold text-lg'>Contactanos</Link>
           </li>
-        
+          <li>
+            <Link to='/dashboard' className='font-bold text-lg'>Dashboard</Link>
+          </li>
         </ul>
       </Flex>
     </div>

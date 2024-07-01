@@ -11,10 +11,54 @@ import CartContext from '../../context/CartContext'
 import BackPage from '../../shared/backPage'
 import ProfileContext from '../../context/ProfileContext'
 import FormProfile from '../Profile/formProfile'
+import { supabase } from '../../services/supabase'
+import { toast } from 'sonner'
 
 function PayData() {
-    const { loading, cart } = useContext(CartContext)
-    
+    const { loading, cart, addOrder } = useContext(CartContext)
+    const [valueOrder, setValueOrder] = useState(0)
+
+    console.log(cart)
+
+    useEffect(() => {
+        let totalOrders = 0
+        cart.forEach(data => {
+            totalOrders += parseFloat(data.Products.price) * data.quantity;
+        })
+        setValueOrder(totalOrders)
+    }, [cart])
+
+    const handleConfirmPurchase = async () => {
+        if (cart.length === 0) {
+            toast.error('El carrito está vacío');
+            return;
+        }
+
+        const orderData = {
+            cart_id: cart[0]?.cart_id,
+            delivery_mount: 0,
+            total_mount: valueOrder,
+            payed_mount: 0
+        };
+        try {
+
+            const { data, error } = await supabase
+                .from('Cart')
+                .select('*')
+                .eq('id', orderData.cart_id);
+
+            if (error || !data || data.length === 0) {
+                toast.error('El carrito no es válido');
+                return;
+            }
+
+            addOrder(orderData);
+            toast.success('Orden enviada')
+        } catch (err) {
+            console.error('Error verificando id', err);
+            toast.error('Error al verificar el carrito');
+        }
+    };
 
     return (
         <section className='w-full'>
@@ -23,7 +67,7 @@ function PayData() {
                 <BackPage />
                 <h2 className='text-black font-bold text-2xl mt-2 col-span-10'>Pago</h2>
                 <p className='col-span-10 mb-1 text-sm opacity-50'>Estos son datos de tu perfil, puedes modificarlos y guardarlos</p>
-                <FormProfile classNameDiv='lg:col-span-5 col-span-10'/>
+                <FormProfile classNameDiv='lg:col-span-5 col-span-10' />
 
 
 
@@ -57,7 +101,7 @@ function PayData() {
                     <div className='mt-10'>
                         <Flex className='flex items-center justify-between mb-4'>
                             <p className='text-sm'>Subtotal</p>
-                            <p className='font-bold text-sm'>$?</p>
+                            <p className='font-bold text-sm'>${valueOrder}</p>
                         </Flex>
                         <Flex className='flex items-center justify-between mb-4'>
                             <p className='text-sm'>Delivery y Empaquetado</p>
@@ -69,7 +113,7 @@ function PayData() {
                         </Flex>
                     </div>
                     <div className='w-full'>
-                        <BtnBlack text='Confirmar compra' className='w-full' />
+                        <BtnBlack text='Confirmar compra' className='w-full' onClick={handleConfirmPurchase} />
                     </div>
                 </div>
 

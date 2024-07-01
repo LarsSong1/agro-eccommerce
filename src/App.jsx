@@ -22,6 +22,7 @@ import CartDrawer from './shared/cartDrawer'
 import { CartProvider } from './context/CartContext'
 import Profile from './Pages/Profile/Profile'
 import { ProfileProvider } from './context/ProfileContext'
+import Dashboard from './Pages/Dashboard/Dashboard'
 
 
 
@@ -67,6 +68,7 @@ const router = createBrowserRouter(
         <Route path='/pay' element={<PayData />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Route>
       <Route path='/login' element={<Login />}></Route>

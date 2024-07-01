@@ -22,6 +22,7 @@ import { FiTrash } from "react-icons/fi";
 import { AiOutlineShopping } from "react-icons/ai";
 import facebookImage from './icons/facebook.svg'
 import { IoMdRemove } from "react-icons/io";
+import { FiSave } from "react-icons/fi";
 
 // LOGOS
 export const googleLogo = glogo
@@ -48,6 +49,7 @@ export const RemoveIcon = IoMdRemove
 export const StarIcon = FaStar
 export const CarTransportIcon = TbCarCrane
 export const TrashIcon = FiTrash
+export const SaveIcon = FiSave
 export const ShopIcon = AiOutlineShopping
 
 // IMANGENES
