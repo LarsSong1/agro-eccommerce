@@ -31,7 +31,7 @@ function Register() {
     }
     const result = await signUp(userFormData)
     const userObject = await supabase.auth.getUser()
-    console.log(result.user)
+    // console.log(result.user)
 
     if (result && result.user) {
       // const { data: { user } } = await supabase.auth.getUser()

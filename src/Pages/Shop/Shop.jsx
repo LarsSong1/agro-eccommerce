@@ -79,7 +79,7 @@ function Shop() {
         </Flex>
         <div className='lg:col-span-8 col-span-10 ps-8 pe-8 lg:pe-0 lg:ps-9'>
           <Flex className='flex gap-2 flex-wrap'>
-            <InputSearch className='grow mb-2' onChange={(e)=>setFilterInput(e.target.value)}/>
+            <InputSearch className='grow mb-2' onChange={(e)=>setFilterInput(e.target.value)} placeholderContent='Buscar Producto'/>
             <BtnIcon text='filtros' icon={<CleanFilterIcon />} onClick={()=>setDataProducts(productsNoLimit)}/>
             {/* <BtnIcon text='Más popular' icon={<FilterIcon2 />} /> */}
           </Flex>

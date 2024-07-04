@@ -35,7 +35,7 @@ function Home() {
 
     const navigate = useNavigate()
 
-    console.log('expirado:',expiredProduct)
+    // console.log('expirado:',expiredProduct)
 
 
 

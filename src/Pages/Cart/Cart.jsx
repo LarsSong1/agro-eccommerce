@@ -22,7 +22,7 @@ function Cart() {
     },[cart])
 
 
-    console.log(cart.Products)
+    // console.log(cart.Products)
     
 
     return (

@@ -183,7 +183,7 @@ export const CartProvider = ({ children }) => {
 
 
     const updateQuantity = (cartId, quantity) => {
-        console.log(quantity);
+        // console.log(quantity);
         setCart(prevCart =>
             prevCart.map(item =>
                 item.id === cartId ? { ...item, quantity } : item
@@ -201,6 +201,29 @@ export const CartProvider = ({ children }) => {
                 .insert([{ cart_id, delivery_mount, total_mount, payed_mount }]) // Usar insert en lugar de upsert para nuevos registros
                 .select()
                 .single();
+
+
+            const orderDetails = cart.map(item => ({
+                order_id: Orders.id,  // Referencia a la orden recién creada
+                product_id: item.product_id,
+                quantity: item.quantity,
+                price: item.Products.price,
+                total: item.Products.price * item.quantity
+            }));
+
+      
+
+            const { data: orderDetailsData, error: orderDetailsError } = await supabase
+                .from('orders_details')
+                .insert(orderDetails)
+                .select()
+
+            if (orderDetailsError) {
+                toast.error('Error al crear los detalles de la orden');
+                console.error('Order details creation error:', orderDetailsError);
+                return;
+            }
+
 
             if (error) {
                 toast.error('No se pudo procesar el pedido');
@@ -271,8 +294,11 @@ export const CartProvider = ({ children }) => {
                         )
                     ),
                     profiles(*)
+                ),
+                orders_details(*,
+                    Products(*)
                 )
-            `);
+            `)
 
         if (error) {
             toast.error('Error')
@@ -282,13 +308,15 @@ export const CartProvider = ({ children }) => {
 
     }
 
+    
+
 
     useEffect(() => {
         if (profile && profile.id) {
             getCartItems();
         }
 
-        if (orderData){
+        if (orderData) {
             getOrders();
         }
 

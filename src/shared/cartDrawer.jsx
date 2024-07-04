@@ -30,7 +30,7 @@ function CartDrawer() {
 
 
 
-  console.log(cart)
+  // console.log(cart)
 
 
   return (

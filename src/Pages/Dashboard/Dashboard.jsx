@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { SaveIcon, TrashIcon } from '../../assets/content'
 import CartContext from '../../context/CartContext'
 import Input from '../../shared/Input'
+import InputSearch from '../../shared/inputSearch'
 
 function Dashboard() {
     const { orderData, deleteOrder, updateOrder } = useContext(CartContext)
     const [inputs, setInputs] = useState({})
+    const [search, setSearch] = useState('')
+    const [filterOrder, setFilterOrder] = useState([])
 
     useEffect(() => {
         if (orderData) {
@@ -18,7 +21,16 @@ function Dashboard() {
             })
             setInputs(initialInputs)
         }
-    }, [orderData])
+
+        let filterForOrders = orderData
+        if (search){
+            filterForOrders = filterForOrders.filter(data=>
+                data.Cart.profiles.full_name.toLowerCase().includes(search.toLowerCase())
+            )
+        }
+
+        setFilterOrder(filterForOrders)
+    }, [orderData, search, orderData])
 
     const handleInputChange = (id, field, value) => {
         setInputs(prevState => ({
@@ -42,6 +54,8 @@ function Dashboard() {
         return <div className='h-screen'>No hay Ordenes</div>
     }
 
+
+    console.log(orderData)
     return (
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm mt-20 lg:w-[80%] w-[94%] " data-v0-t="card">
             <div className="flex flex-col space-y-1.5 p-6">
@@ -49,6 +63,7 @@ function Dashboard() {
                 <p className="text-sm text-muted-foreground">Ve los detalles de los pedidos que han hecho tus clientes</p>
             </div>
             <div className="p-6">
+                <InputSearch onChange={(e)=>setSearch(e.target.value)} placeholderContent='Buscar Nombre'/>
                 <div className="relative w-full lg:overflow-auto overflow-x-scroll">
                     <table className="lg:w-full w-[1000px] caption-bottom text-sm ">
                         <thead className="[&amp;_tr]:border-b">
@@ -72,7 +87,7 @@ function Dashboard() {
                         </thead>
                         <tbody className="[&amp;_tr:last-child]:border-0">
                             {
-                                orderData.map(order => (
+                                filterOrder.map(order => (
                                     <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" key={order.id}>
                                         <td className="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
                                             <div className="font-medium">
@@ -84,11 +99,12 @@ function Dashboard() {
                                         <td className="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
                                             <Input
                                                 className=''
+                                                placeholder='Delivery: $'
                                                 inputValue={inputs[order.id]?.deliveryMount || ''}
                                                 onChange={(e) => handleInputChange(order.id, 'deliveryMount', e.target.value)}
                                             />
                                             <div className="flex flex-col w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                                                {order.Cart?.Cart_items?.map(item => (
+                                                {order?.orders_details.map(item => (
                                                     <div className='flex justify-between' key={item.id}>
                                                         <p className='font-bold'>{item.quantity} {item.Products?.name}:</p> <p className=''>${item.Products?.price}</p>
                                                     </div>
@@ -106,6 +122,7 @@ function Dashboard() {
                                         <td className="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
                                             <Input
                                                 className=''
+                                                placeholder='Monto Pagado: $'
                                                 inputValue={inputs[order.id]?.payedMount || ''}
                                                 onChange={(e) => handleInputChange(order.id, 'payedMount', e.target.value)}
                                             />

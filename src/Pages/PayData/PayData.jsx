@@ -18,7 +18,7 @@ function PayData() {
     const { loading, cart, addOrder } = useContext(CartContext)
     const [valueOrder, setValueOrder] = useState(0)
 
-    console.log(cart)
+    // console.log(cart)
 
     useEffect(() => {
         let totalOrders = 0
@@ -28,11 +28,14 @@ function PayData() {
         setValueOrder(totalOrders)
     }, [cart])
 
-    const handleConfirmPurchase = async () => {
+    const handleConfirmPurchase = async (e) => {
+        e.preventDefault()
         if (cart.length === 0) {
             toast.error('El carrito está vacío');
             return;
         }
+
+
 
         const orderData = {
             cart_id: cart[0]?.cart_id,
@@ -51,6 +54,8 @@ function PayData() {
                 toast.error('El carrito no es válido');
                 return;
             }
+
+
 
             addOrder(orderData);
             toast.success('Orden enviada')

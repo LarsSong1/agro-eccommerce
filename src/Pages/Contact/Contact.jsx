@@ -1,8 +1,38 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { dataContact } from './contactData'
+import { toast } from 'sonner'
+import emailjs from '@emailjs/browser'
+
 
 
 function Contact() {
+    const form = useRef()
+
+
+
+    const submitForm = (e) => {
+        e.preventDefault()
+        emailjs.sendForm('service_o9zh89q', 'template_yxgfj36', form.current, {
+            publicKey: 'jLhlh2Zrud6_MFhQr'
+        })
+            .then(
+                () => {
+                    toast.success('Correo enviado')
+                }, 
+                (error) => {
+                    toast.error('Error al enviar el correo')
+                }
+            )
+
+
+    }
+
+
+
+
+
+
+
     return (
         <section>
             <div className="mt-20 lg:mt-36">
@@ -35,20 +65,20 @@ function Contact() {
                                 <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
                                     <a href="https://www.facebook.com/guidoz1968" target='_blank'>
 
-                                       <img className='w-8' src={dataContact.facebookIcon} alt="facebook Logo" />
+                                        <img className='w-8' src={dataContact.facebookIcon} alt="facebook Logo" />
                                     </a>
                                 </li>
-                            
+
                                 <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
                                     <a href={`https://wa.me/${dataContact.whatsappNumber}?text=${dataContact.whatsappText}`} target='_blank'>
-                                    <img className='w-8' src={dataContact.whatsappIcon} alt="facebook Logo" />
+                                        <img className='w-8' src={dataContact.whatsappIcon} alt="facebook Logo" />
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <form action="https://fabform.io/f/xxxxx" method="post" className="ml-auo space-y-4">
+                    <form ref={form} onSubmit={submitForm} className="ml-auo space-y-4">
                         <input type='text' name="name" placeholder='Nombre'
                             className="w-full rounded-md py-2.5 px-4 border text-sm border-gray-600" />
                         <input type='email'
@@ -59,8 +89,10 @@ function Contact() {
                             name='subject' className="w-full rounded-md py-2.5 px-4 border text-sm border-gray-600" />
                         <textarea placeholder='Mensaje' rows="6"
                             name='message'
-                            className="w-full rounded-md px-4 border text-sm pt-2.5 border-gray-600"></textarea>
-                        <button type='button'
+                            className="w-full rounded-md px-4 border text-sm pt-2.5 border-gray-600"
+
+                        ></textarea>
+                        <button type='submit'
                             className="text-white bg-black hover:bg-white hover:text-black font-semibold rounded-md text-sm px-4 py-2.5 w-full border-2 border-black">Send</button>
                     </form>
                 </div>

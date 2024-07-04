@@ -54,7 +54,7 @@ export const ProfileProvider = ({ children }) => {
                 toast.error('Eror al actualizar los datos')
             } else {
                 toast.success('Datos actualizados correctamente')
-                console.log(profileUpdated)
+                // console.log(profileUpdated)
                 // array 
                 setProfileData(profileUpdated[0])
                 return profileUpdated[0]
