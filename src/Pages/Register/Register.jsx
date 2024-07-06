@@ -60,7 +60,7 @@ function Register() {
 
       <form onSubmit={handleSubmit} className="flex justify-center flex-col w-[100%] lg:w-[400px] gap-2">
         <Toaster position='top-right' expand visibleToasts={2} duration={1500} />
-        <img className='w-24 h-24 mx-auto' src={agrozamLogo} alt="logo" />
+        <img className='w-32 h-32 mx-auto' src={agrozamLogo} alt="logo" />
         <h1 className="text-xl font-bold text-black text-center">Crea cuenta en Agrozam</h1>
         <Input label='Usuario' type='text' placeholder='Nombre de Usuario' onChange={e => setUsername(e.target.value)} />
         <Input label='Correo' type='text' placeholder='Correo Electrónico' onChange={e => setEmail(e.target.value)} />

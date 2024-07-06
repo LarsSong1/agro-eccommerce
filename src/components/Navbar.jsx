@@ -12,9 +12,9 @@ import Flex from './Flex';
 function Navbar() {
 
     const { toggleDrawer } = useContext(DrawerContext);
-    const { user } = useContext(AuthContext)
+    const { user, profile } = useContext(AuthContext)
     const { toggleCartDrawer } = useContext(DrawerContext)
-    
+
 
     let username = ''
     let imgProfile = alternativePicture
@@ -32,9 +32,9 @@ function Navbar() {
         <>
             <div className="navbar fixed lg:w-[80%] bg-white z-20 ">
                 <div
-                    onClick={toggleDrawer(true)}
-                    className='lg:hidden navbar-start w-[20%] btn bg-white hover:bg-white border-none relative' >
-                    <MenuIcon className='relative' color='black' height={20} width={30} />
+                    className='lg:hidden navbar-start w-[20%] ps-4 pe-4 bg-white hover:bg-white border-none relative' >
+                    <MenuIcon onClick={toggleDrawer(true)} className='relative' color='black' height={20} width={30} />
+
                 </div>
                 <Flex className="navbar-start lg:flex hidden w-[20%]">
                     <a className="text-xl ">
@@ -44,7 +44,7 @@ function Navbar() {
                 <div className="navbar-center flex gap-2 grow lg:justify-center lg:w-[60%] ms-4">
                     <Link className='lg:block hidden' to='/'>Inicio</Link>
                     <Link className='lg:block hidden' to='/shop'>Productos</Link>
-                    <Link className="lg:block hidden" to='/dashboard'>Dashboard</Link>
+                    {profile?.admin ? <Link className="lg:block hidden" to='/dashboard'>Dashboard</Link> : <></>}
                     {/* <Link className='lg:block hidden' to='/pay'>Pagos</Link>
                     <Link className='lg:block hidden' to='/cart'>Carrito</Link> */}
                     <img className='w-16 h-16 lg:hidden mx-auto block' src={agrozamLogo} alt="logo" />
@@ -53,8 +53,8 @@ function Navbar() {
                     {
                         user ? (
                             <>
-                                <BtnShop className='hidden lg:block' 
-                                onClick={toggleCartDrawer(true)}
+                                <BtnShop className='hidden lg:block'
+                                    onClick={toggleCartDrawer(true)}
                                 />
 
                                 <Avatar classDiv='rounded-full w-10 z-20' imgSrc={imgProfile} />

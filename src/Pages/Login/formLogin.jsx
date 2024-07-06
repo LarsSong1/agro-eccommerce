@@ -43,7 +43,7 @@ function FormLogin() {
     return (
         <>
             <form onSubmit={loginWithEmail} className="flex justify-center flex-col w-[100%] lg:w-[400px] gap-2">
-                <img className='w-24 h-24 mx-auto' src={agrozamLogo} alt="logo" />
+                <img className='w-32 h-32 mx-auto' src={agrozamLogo} alt="logo" />
                 <h1 className="text-xl font-bold text-black text-center">Ingresa en Agrozam</h1>
                 <BtnImage logo={googleLogo} text='Continua con Google' onClick={loginGoogle} />
 
