@@ -52,7 +52,7 @@ function Contact() {
                                                 data-original="#000000" />
                                         </svg>
                                     </div>
-                                    <a target="blank" href="https://veilmail.io/e/FkKh7o" className="text-customBlue text-sm ml-3">
+                                    <a target="blank" href={`mailto:${dataContact.email}`} className="text-customBlue text-sm ml-3">
                                         <small className="block">Correo electrónico</small>
                                         <strong>{dataContact.email}</strong>
                                     </a>
@@ -63,7 +63,7 @@ function Contact() {
                             <h2 className="text-lg font-extrabold">Socials</h2>
                             <ul className="flex mt-3 space-x-4">
                                 <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                                    <a href="https://www.facebook.com/guidoz1968" target='_blank'>
+                                    <a href={dataContact.facebook} target='_blank'>
 
                                         <img className='w-8' src={dataContact.facebookIcon} alt="facebook Logo" />
                                     </a>
@@ -93,7 +93,7 @@ function Contact() {
 
                         ></textarea>
                         <button type='submit'
-                            className="text-white bg-black hover:bg-white hover:text-black font-semibold rounded-md text-sm px-4 py-2.5 w-full border-2 border-black">Send</button>
+                            className="text-white bg-black hover:bg-white hover:text-black font-semibold rounded-md text-sm px-4 py-2.5 w-full border-2 border-black">Enviar</button>
                     </form>
                 </div>
             </div>

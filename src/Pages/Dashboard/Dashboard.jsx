@@ -3,6 +3,8 @@ import { SaveIcon, TrashIcon } from '../../assets/content'
 import CartContext from '../../context/CartContext'
 import Input from '../../shared/Input'
 import InputSearch from '../../shared/inputSearch'
+import { BsWhatsapp } from 'react-icons/bs'
+import { BiSend } from 'react-icons/bi'
 
 function Dashboard() {
     const { orderData, deleteOrder, updateOrder } = useContext(CartContext)
@@ -23,8 +25,8 @@ function Dashboard() {
         }
 
         let filterForOrders = orderData
-        if (search){
-            filterForOrders = filterForOrders.filter(data=>
+        if (search) {
+            filterForOrders = filterForOrders.filter(data =>
                 data.Cart.profiles.full_name.toLowerCase().includes(search.toLowerCase())
             )
         }
@@ -54,6 +56,16 @@ function Dashboard() {
         return <div className='h-screen'>No hay Ordenes</div>
     }
 
+    const formatOrderMessage = (order, mountDelivery) => {
+        let message = `Hola has hecho un pedido recientemente en Agrozam y esto es lo que has pedido:\n`;
+        order.orders_details.forEach(item => {
+            message += `${item.quantity} ${item.Products?.name}: $${item.Products?.price}\n`;
+        });
+        message += `Total: $${Number(order.total_mount) + Number(order.delivery_mount) + Number(mountDelivery)}\n`;
+        message += `Aceptamos los siguientes Metodos de pago:\nBanco Pichincha: xxxxxxxxxxxx \nBanco Pacifico: xxxxxxxxxxxxxx \nRecuerda enviarnos el comprobante al presente numero`
+        return encodeURIComponent(message); // Asegúrate de que el mensaje esté correctamente codificado
+    };
+
 
     console.log(orderData)
     return (
@@ -63,13 +75,16 @@ function Dashboard() {
                 <p className="text-sm text-muted-foreground">Ve los detalles de los pedidos que han hecho tus clientes</p>
             </div>
             <div className="p-6">
-                <InputSearch onChange={(e)=>setSearch(e.target.value)} placeholderContent='Buscar Nombre'/>
+                <InputSearch onChange={(e) => setSearch(e.target.value)} placeholderContent='Buscar Nombre' />
                 <div className="relative w-full lg:overflow-auto overflow-x-scroll">
                     <table className="lg:w-full w-[1000px] caption-bottom text-sm ">
                         <thead className="[&amp;_tr]:border-b">
                             <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
                                     Nombre del cliente
+                                </th>
+                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                                    Número
                                 </th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
                                     Producto y Delivery
@@ -94,6 +109,18 @@ function Dashboard() {
                                                 <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                                                     {order.Cart.profiles.full_name}
                                                 </div>
+                                            </div>
+                                        </td>
+                                        <td className="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
+                                            <div className="font-medium">
+                                                <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                                                    {order.Cart.profiles.phone}
+                                                </div>
+
+                                                <a href={`https://wa.me/${order.Cart.profiles.phone}?text=Hola%20quiero%20hablar%20contigo`} className='w-full bg-green-600 py-2 rounded-md flex items-center justify-center mt-2'>
+                                                    <BsWhatsapp color='white' />
+
+                                                </a>
                                             </div>
                                         </td>
                                         <td className="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
@@ -127,18 +154,28 @@ function Dashboard() {
                                                 onChange={(e) => handleInputChange(order.id, 'payedMount', e.target.value)}
                                             />
                                         </td>
-                                        <td className="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
-                                            <button
-                                                onClick={() => handleSave(order.id)}
-                                                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10">
-                                                <SaveIcon />
-                                                <span className="sr-only">Save</span>
-                                            </button>
-                                            <button
-                                                onClick={() => deleteOrder(order.id)}
-                                                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10">
-                                                <TrashIcon />
-                                            </button>
+                                        <td className=" align-middle [&amp;:has([role=checkbox])]:pr-0 mx-auto">
+                                            <div>
+                                                <button
+                                                    onClick={() => handleSave(order.id)}
+                                                    className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10">
+                                                    <SaveIcon />
+                                                    <span className="sr-only">Save</span>
+                                                </button>
+                                                <button
+                                                    onClick={() => deleteOrder(order.id)}
+                                                    className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-red-400 hover:text-black h-10 w-10">
+                                                    <TrashIcon />
+                                                </button>
+                                                <a
+                                                    href={`https://wa.me/${order.Cart.profiles.phone}?text=${formatOrderMessage(order, order.delivery_mount)}`}
+                                                    className="inline-flex items-center mx-auto justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-green-400 hover:text-accent-foreground h-10 w-10"
+                                                >
+                                                    <BiSend className='-rotate-45' />
+                                                </a>
+
+                                            </div>
+
                                         </td>
                                     </tr>
                                 ))

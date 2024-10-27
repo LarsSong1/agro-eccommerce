@@ -41,7 +41,7 @@ const Layout = () => {
             <CartProvider>
               <CategoryProvider>
                 <DrawerProvider>
-                  <section className='max-w-[1920px] mx-auto relative flex flex-col items-center'>
+                  <section className='max-w-[1920px] mx-auto relative flex flex-col items-center '>
 
                     <Drawer />
                     <CartDrawer />

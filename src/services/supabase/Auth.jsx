@@ -15,8 +15,6 @@ export const signUp = async (dataForm) => {
             toast.success('Usuario creado')
         }
         return data;
-   
-
 }
 
 
