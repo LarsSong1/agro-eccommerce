@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { MenuIcon, agrozamLogo, alternativePicture } from '../assets/content';
+import { MenuIcon, agromaticsLogo, alternativePicture } from '../assets/content';
 import { CiSearch } from "react-icons/ci";
 import Avatar from '../shared/avatar';
 import AuthContext from '../context/AutContext';
@@ -38,7 +38,7 @@ function Navbar() {
                 </div>
                 <Flex className="navbar-start lg:flex hidden w-[20%]">
                     <a className="text-xl ">
-                        <img className='w-16 h-16' src={agrozamLogo} alt="logo" />
+                        <img className='w-16 h-16' src={agromaticsLogo} alt="logo" />
                     </a>
                 </Flex>
                 <div className="navbar-center flex gap-2 grow lg:justify-center lg:w-[60%] ms-4">
@@ -47,7 +47,7 @@ function Navbar() {
                     {profile?.admin ? <Link className="lg:block hidden" to='/dashboard'>Dashboard</Link> : <></>}
                     {/* <Link className='lg:block hidden' to='/pay'>Pagos</Link>
                     <Link className='lg:block hidden' to='/cart'>Carrito</Link> */}
-                    <img className='w-16 h-16 lg:hidden mx-auto block' src={agrozamLogo} alt="logo" />
+                    <img className='w-16 h-16 lg:hidden mx-auto block' src={agromaticsLogo} alt="logo" />
                 </div>
                 <div className='navbar-end w-[20%]'>
                     {

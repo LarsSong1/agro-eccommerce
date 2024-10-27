@@ -18,7 +18,7 @@ function Footer() {
             ">
                 <div className="container grid gap-10 py-16 lg:grid-cols-2 lg:gap-0 w-[80%] mx-auto">
                     <div className="space-y-10 md:pr-20">
-                        <LogoName name='AgroZam'/>
+                        <LogoName name='Agromatics'/>
                         <p className="">{footerData.description}</p>
                         <Subscribe/>
                     </div>

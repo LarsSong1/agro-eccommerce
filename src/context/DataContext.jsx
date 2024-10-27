@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { supabase } from "../services/supabase";
 import { toast } from 'sonner'
 import Push from 'push.js'
-import { agrozamLogo } from "../assets/content";
+import { agromaticsLogo } from "../assets/content";
 
 
 
@@ -188,7 +188,7 @@ export const DataProvider = ({ children }) => {
                         // Enviar una notificación por cada producto expirado
                         Push.create('Producto Expirado', {
                             body: `${product.name} expira mañana`,
-                            icon: agrozamLogo,
+                            icon: agromaticsLogo,
                             timeout: 1000000,
                             onClick: function () {
                                 window.location.href = `http://localhost:5173/`;

@@ -1,5 +1,5 @@
 import glogo from './icons/google.svg'
-import agrologo from './logos/agrozamLogo.svg'
+import agrologo from './logos/agromatics-logo.svg'
 import { IoPersonCircleSharp, IoMenu } from "react-icons/io5";
 import agrouser from  './images/doodlezam.webp'
 import { FiArrowUpRight } from "react-icons/fi";
@@ -26,7 +26,7 @@ import { FiSave } from "react-icons/fi";
 
 // LOGOS
 export const googleLogo = glogo
-export const agrozamLogo = agrologo
+export const agromaticsLogo = agrologo
 export const whatsappLogo = whatsapp
 export const facebookLogo = facebookImage
 

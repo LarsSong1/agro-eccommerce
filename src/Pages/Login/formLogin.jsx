@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import AuthContext from '../../context/AutContext'
 import BtnBlack from '../../shared/btnBlack'
 import Input from '../../shared/Input'
-import { googleLogo, agrozamLogo, ArrowUpRight } from '../../assets/content'
+import { googleLogo, agromaticsLogo, ArrowUpRight } from '../../assets/content'
 
 
 
@@ -43,8 +43,8 @@ function FormLogin() {
     return (
         <>
             <form onSubmit={loginWithEmail} className="flex justify-center flex-col w-[100%] lg:w-[400px] gap-2">
-                <img className='w-32 h-32 mx-auto' src={agrozamLogo} alt="logo" />
-                <h1 className="text-xl font-bold text-black text-center">Ingresa en Agrozam</h1>
+                <img className='w-32 h-32 mx-auto' src={agromaticsLogo} alt="logo" />
+                <h1 className="text-xl font-bold text-black text-center">Ingresa en Agromatics</h1>
                 <BtnImage logo={googleLogo} text='Continua con Google' onClick={loginGoogle} />
 
                 <div className='mb-2 mt-4 relative flex flex-col justify-center'>

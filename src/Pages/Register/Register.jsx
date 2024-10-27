@@ -5,7 +5,7 @@ import BtnBlack from '../../shared/btnBlack';
 import Input from '../../shared/Input';
 import BtnImage from '../../shared/btnImage';
 import { supabase } from '../../services/supabase';
-import { ArrowUpRight, agrozamLogo, googleLogo } from '../../assets/content';
+import { ArrowUpRight, agromaticsLogo, googleLogo } from '../../assets/content';
 import { Toaster, toast } from 'sonner';
 import AuthContext from '../../context/AutContext';
 
@@ -60,8 +60,8 @@ function Register() {
 
       <form onSubmit={handleSubmit} className="flex justify-center flex-col w-[100%] lg:w-[400px] gap-2">
         <Toaster position='top-right' expand visibleToasts={2} duration={1500} />
-        <img className='w-32 h-32 mx-auto' src={agrozamLogo} alt="logo" />
-        <h1 className="text-xl font-bold text-black text-center">Crea cuenta en Agrozam</h1>
+        <img className='w-32 h-32 mx-auto' src={agromaticsLogo} alt="logo" />
+        <h1 className="text-xl font-bold text-black text-center">Crea cuenta en Agromatics</h1>
         <Input label='Usuario' type='text' placeholder='Nombre de Usuario' onChange={e => setUsername(e.target.value)} />
         <Input label='Correo' type='text' placeholder='Correo Electrónico' onChange={e => setEmail(e.target.value)} />
         <Input label='Contraseña' type='password' placeholder='Ingresa tu contraseña' onChange={e => setPassword(e.target.value)} />
