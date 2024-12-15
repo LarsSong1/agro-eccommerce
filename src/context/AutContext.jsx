@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [profile, setProfile] = useState(null)
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
-
+    
 
 
     const checkUser = async () => {
@@ -49,10 +49,7 @@ export const AuthProvider = ({ children }) => {
 
 
 
-
     useEffect(() => {
-
-
         const { data: authListener } = supabase.auth.onAuthStateChange(
             async (event, session) => {
                 if (!session) {

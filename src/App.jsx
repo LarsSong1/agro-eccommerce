@@ -32,7 +32,6 @@ import ProtectedRoute from './components/protectedRoute'
 const Layout = () => {
   const { profileData } = useContext(ProfileContext)
 
-  
   return (
     <>
       <AuthProvider>
@@ -73,19 +72,17 @@ const router = createBrowserRouter(
         <Route path='/pay' element={<PayData />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
-        <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}></Route>
+        <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Route>
       <Route path='/login' element={<Login />}></Route>
-      <Route path='/register' element={<Register />}></Route> 
+      <Route path='/register' element={<Register />}></Route>
     </Route>
   )
 )
 
 
 function App() {
-
-
   return (
     <>
       <RouterProvider router={router} />
@@ -94,3 +91,5 @@ function App() {
 }
 
 export default App
+
+

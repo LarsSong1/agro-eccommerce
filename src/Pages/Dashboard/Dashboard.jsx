@@ -57,7 +57,7 @@ function Dashboard() {
     }
 
     const formatOrderMessage = (order, mountDelivery) => {
-        let message = `Hola has hecho un pedido recientemente en Agromatics y esto es lo que has pedido:\n`;
+        let message = `Hola has hecho un pedido recientemente en Agrozam y esto es lo que has pedido:\n`;
         order.orders_details.forEach(item => {
             message += `${item.quantity} ${item.Products?.name}: $${item.Products?.price}\n`;
         });

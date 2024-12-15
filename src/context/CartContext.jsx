@@ -27,7 +27,7 @@ export const CartProvider = ({ children }) => {
     const { profile } = useContext(AuthContext);
 
 
-
+    
     const createCart = async () => {
         try {
             const { data: newCart, error: createCartError } = await supabase

@@ -41,7 +41,6 @@ export const ProfileProvider = ({ children }) => {
 
 
     const updateProfile = async (data) => {
-        
         try {
             let { data: profileUpdated, error } = await supabase
                 .from('profiles')

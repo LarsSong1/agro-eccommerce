@@ -5,9 +5,7 @@ import { supabase } from ".";
 
 // Funcion crear usuarios
 export const signUp = async (dataForm) => {
-   
-        let {data, error} = await supabase.auth.signUp(dataForm);
-        
+        let {data, error} = await supabase.auth.signUp(dataForm);     
         if (error){
             toast.error(`${error.message}`)
             toast('Intenta usando otro correo')
@@ -31,8 +29,6 @@ export const updateProfileUsername = async (data) => {
 export const signIn = async (data) => {
     try {
         let { data: { user }, error } = await supabase.auth.signInWithPassword(data)
-
-
         if (error){
             toast.error(`${error.message}`)
         }else {

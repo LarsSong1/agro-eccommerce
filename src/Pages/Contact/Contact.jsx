@@ -23,8 +23,6 @@ function Contact() {
                     toast.error('Error al enviar el correo')
                 }
             )
-
-
     }
 
 
