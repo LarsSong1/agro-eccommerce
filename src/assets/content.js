@@ -26,7 +26,6 @@ import  agrozam  from './logos/agrozamLogo.svg'
 
 // LOGOS
 export const googleLogo = glogo
-export const agromaticsLogo = agrologo
 export const agrozamLogo = agrozam
 export const whatsappLogo = whatsapp
 export const facebookLogo = facebookImage
